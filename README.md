@@ -1,5 +1,5 @@
 # project 
-This is a handmade drinks store website which can provide people to buy beverage and customize their sepcial handmade drinks.<br>
+This is a handmade drinks store website which can provide people to buy drinks and customize their sepcial handmade drinks.<br>
 It also can group buying handmade drinks.If the price or cop number more than a number,then you will get the discount.<br>
 
 ## User Story:
