@@ -1,0 +1,88 @@
+/*aboutUs*/
+body {
+    font-family: Microsoft JhengHei;
+}
+
+#banner {
+    margin-top: 50px;
+}
+
+
+.text {
+    margin-top: 3%;
+}
+
+.pic {
+    padding: 0px;
+}
+
+.title {
+    color: #FA8072;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.list {
+    padding: 10px 0px;
+    list-style-type:none;
+    font-weight: bold;
+    color: #5A5A5A;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    height: 50px;
+    text-align: center;
+    font-size: 10px;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+@media (max-width: 992px) {
+    .text {
+        margin-top: 0px;
+    }
+    .pic {
+        padding: 15px;
+    }
+}
+
+/*product_detail*/
+body {
+    font-family: Microsoft JhengHei;
+}
+
+#banner {
+    margin-top: 50px;
+}
+
+.title {
+    color: #FA8072;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #6d6d6d;
+    font-weight: bold;
+}
+
+span {
+    margin-right: 5px;
+}
+.col-md-8 img{
+    width: 100%;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    height: 50px;
+    text-align: center;
+    font-size: 10px;
+    font-size: 10px;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+

@@ -1,0 +1,65 @@
+.navbar-custom {
+    background-image: none;
+    background-color: yellow;
+    border-width: 0px;
+    /* NEW */
+    margin-bottom: 0px;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color: blueviolet;
+}
+
+.navbar-custom .navbar-brand {
+    color: blue;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.custom-black-bg {
+    background-color: blueviolet;
+}
+
+form {
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html{
+    margin-bottom: 50px;
+}
+
+.card{
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    color:black;
+    margin:10px;
+}
+
+.card:hover{
+    transform: scale(1.02);
+    transition-timing-function: ease-out;
+}
+
+a, a:hover, a:active{
+    text-decoration: none;
+}
+
+.card-title{
+    font-size:1.5em;
+    padding:5px;
+}
+
+.card-content{
+    padding:5px;
+    border-top:1px solid #e5e5e5;
+}
+
+
+

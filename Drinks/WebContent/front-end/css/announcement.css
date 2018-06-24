@@ -1,0 +1,90 @@
+body{
+	color: #59220d;
+	line-height: 1.5;
+	font-size: 14px;
+	font-family: sans-serif;
+}
+
+/*info
+--------------------*/
+#info{
+	margin-bottom: 20px;
+}
+
+.info-list dt{
+	clear: left;
+	float: left;
+	width: 7em;
+	padding: 10px 0;
+	border-top: #d8c7a0 1px dotted;
+}
+.info-list dd{
+	padding: 10px 0;
+	border-top: #d8c7a0 1px dotted;
+	overflow: hidden;
+}
+.info-list :first-of-type{
+	border-top: none;
+}
+@media screen and (min-width: 640px){
+	#info{
+		float: left;
+		width: 90%;
+	}
+}
+
+/*Heading
+--------------------*/
+.heading{
+	margin-bottom: 15px;
+	border-bottom: #4d941a 1px solid;
+	color: #4d941a;
+	font-size: 20px;
+	font-weight: normal;
+	font-family: 'Cardo', serif;
+	font-style: italic;
+	overflow: hidden;
+	position: relative;
+}
+.heading:before{
+	content:"";
+	display: inline-block;
+	width: 35px;
+	height: 26px;
+	margin-right: 5px;
+	background: url(../img/ico_pot.png) no-repeat;
+	position: relative;
+	bottom:-3px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx){
+	.heading:before{
+		background: url(../img/ico_pot@2x.png) no-repeat;
+		background-size: contain;
+	}
+}
+
+.heading .more{
+	float: right;
+	display: inline-block;
+	padding: 5px 5px 5px 10px;
+	background: #4d941a;
+	border-radius: 2em;
+	color: #fff;
+	text-decoration: none;
+	font-size: 14px;
+	line-height: 1;
+}
+.heading .more:hover{
+	opacity: 0.7;
+}
+.heading .more:after{
+	content: "";
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-top: 2px;
+	margin-left: 5px;
+	border: transparent 5px solid;
+	border-left-color: #fff;
+}

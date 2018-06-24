@@ -1,0 +1,116 @@
+#logo{
+  height: 50px;
+  margin-top:-15px;	
+}
+.dropdown{
+	padding-left: 50px;
+	font-size: 22px;
+	padding-top: 5px;
+	font-weight:bold;
+}
+li a{
+
+	font-size: 20px;
+}
+li span{
+	padding-top:11%;
+}
+
+
+#mainNav{
+	height:8%;
+	margin-bottom: 0px;
+}
+
+
+h3{
+	font-size: 40px;
+	font-weight:bold;
+	color:	#FF0000;
+	text-align:center;
+}
+.item img{
+	width: 100%;
+}
+.card-text{
+	color:#23291;
+	font-weight:bold;
+}
+.card-title{
+	color: #CC0000;
+	font-weight:bold;
+	font-size: 20px;
+}
+.btn-car{
+	
+	color: white;
+}
+.cut{
+	width: 100%;
+	padding-top: 70px
+}
+.cut1{
+	width: 100%;
+	padding-top: 30px
+}
+
+#carousel-id{
+	margin-bottom: 3%;
+}
+
+#footer{
+	height:70px; 
+	padding:0px;
+	margin: 0px;
+	width: 100%;
+	position: fixed;
+    bottom: 0;
+	background-color: rgb(250,214,137);
+}
+.info{
+	color:white;
+	font-size: 25px;
+}
+
+#Q{
+	width: 100%;
+	height: 500px;
+	margin-top:3%;
+}
+
+b{
+	font-weight: bold;
+	font-size: 20px;
+	
+}
+#hot{
+	width: 80px;
+}
+
+.card-img-top{
+	border: solid;
+    width: 100%;
+	margin-top: -80px;
+}
+.commodity {
+	font-size: 30px;
+	font-weight:bold;
+	color:black;
+	margin-left: 65px; 
+}
+#commodity{
+	font-size: 20px;
+	color:#08085E;
+	font-weight: bold;
+}
+.PRODUCTS{
+
+	width: 100%;
+	height: 30%;
+	border: solid;
+	background-image: url(../img/56fe24c0e2983_1024.jpg);
+}
+
+.heart{
+	color:white;
+}
