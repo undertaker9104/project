@@ -234,7 +234,7 @@
                 		      var results = response.rows[i].elements;
                 		        var element = results[i];
                 		        var distance = element.distance;
-                		        if(distance.value > 3000){
+                		        if(distance.value > 10000){
                 		        	$('#distance').html("距離為"+distance.text+",超出外送範圍請重新輸入地址");
                 		        	$('#distance').css("color","red");
                 		        	$('#insert').attr('disabled',true);
@@ -284,7 +284,7 @@ $("#address").blur(function(){
             		      var results = response.rows[i].elements;
             		        var element = results[i];
             		        var distance = element.distance;
-            		        if(distance.value > 3000){
+            		        if(distance.value > 10000){
             		        	$('#distance').html("距離為"+distance.text+",超出外送範圍請重新輸入地址");
             		        	$('#distance').css("color","red");
             		        	$('#insert').attr('disabled',true);

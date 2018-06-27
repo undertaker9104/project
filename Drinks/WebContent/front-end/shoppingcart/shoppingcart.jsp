@@ -38,18 +38,12 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front-end/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front-end/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/front-end/js/sweetalert.min.js"></script>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/front-end/css/sweetalert.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<link rel="stylesheet" 	href="<%=request.getContextPath()%>/front-end/css/bootstrap-theme.min.css">
+<link rel="stylesheet" 	href="<%=request.getContextPath()%>/front-end/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"src="<%=request.getContextPath()%>/front-end/js/sweetalert.min.js"></script>
+<link rel="stylesheet" 	href="<%=request.getContextPath()%>/front-end/css/sweetalert.css" />
+<link rel="stylesheet" 	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
 
 <style type="text/css">
 body, td, th, input {
@@ -72,15 +66,12 @@ img {
 </head>
 <body>
 	<jsp:include page="/front-end/header.jsp" />
-	<jsp:useBean id="sweetSvc" scope="page"
-		class="com.sweet.model.SweetService" />
+	<jsp:useBean id="sweetSvc" scope="page" class="com.sweet.model.SweetService" />
 	<jsp:useBean id="iceSvc" scope="page" class="com.ice.model.IceService" />
 	<div class="container-fulled" style="margin-top: 2%">
 		<div class="row">
-			<div
-				class="page-header text-left col-xs-12 col-sm-10 col-sm-offset-1">
-				<label><img
-					src="<%=request.getContextPath()%>/front-end/img/shopping-cart.png"></label>
+			<div class="page-header text-left col-xs-12 col-sm-10 col-sm-offset-1">
+				<label><img src="<%=request.getContextPath()%>/front-end/img/shopping-cart.png"></label>
 			</div>
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1 well form-horizontal">
 				<% List<ShoppingCartVO> list = (List<ShoppingCartVO>) session.getAttribute("list");%>
@@ -104,19 +95,6 @@ img {
 
 				<table class="table table-hover">
 					<thead>
-					<%-- 
-						<tr>
-							<th	style="text-align: center; font-size: 24px; font-weight: bold">名稱</th>
-							<th style="text-align: center; font-size: 24px">價格</th>
-							<th style="text-align: center; font-size: 24px">敘述</th>
-							<th style="text-align: center; font-size: 24px">圖片</th>
-							<th style="text-align: center; font-size: 24px">甜度</th>
-							<th style="text-align: center; font-size: 24px">冰塊</th>
-							<th style="text-align: center; font-size: 24px">數量</th>
-							<th style="text-align: center; font-size: 24px">更改</th>
-							<th style="text-align: center; font-size: 24px">取消</th>
-						</tr>
-					--%>
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="order" varStatus="s">
@@ -291,13 +269,9 @@ img {
     		window.addEventListener("load", init, false);
 	</script>
 
-	<script
-		src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js'
-		type='text/javascript'></script>
-	<script
-		src='https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js'></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOcxUQe-85L7pEFGVR-BJXxHoHI0Doc8s">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js' type='text/javascript'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js'></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOcxUQe-85L7pEFGVR-BJXxHoHI0Doc8s">
 </script>
 	<script type="text/javascript">
    		function checkoutconfirm(){	
@@ -311,10 +285,11 @@ img {
    				  confirmButtonText: "儲值去",
    				  cancelButtonText: "取消",
    			      closeOnConfirm: true, 
-   			      closeOnCancel: false    
+   			      closeOnCancel: false  
+   			      
    			},
-   			    function(isConfirm){
-   				 window.location.href ="front-end/mem/storedPoint.jsp";
+   			    function(isConfirm){ 
+   			    window.location.assign("http://localhost:8081/CA101G2/front-end/mem/storedPoint.jsp");
    				});
    			}else{
    				swal("訂單成立!", "感謝你的購買!","success")

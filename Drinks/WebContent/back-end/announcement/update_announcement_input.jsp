@@ -7,13 +7,12 @@
 <html>
 <head>
 <title>公告資料修改 </title></head>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/css/bootstrap.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/bootstrap.css">
 <body>
+	<br><br>
 	<div class="container">
-		<jsp:include page="/front-end/header.jsp" />
 			<div class="row">
-				<div class="col-xs-12 col-sm-4">
-
+				<div class="container col-md-8 col-md-offset-2">
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/announcement.do" enctype="multipart/form-data" name="form1">
 						<div class="form-group">
 							<td>公告編號:<font color=red><b>*</b></font></td>${announcementVO.ann_id}
@@ -32,7 +31,23 @@
 						</div>
 						<div class="form-group">
 							<label>圖片:</label>
-							<input type="file" name="ann_img" size="45" value="${announcementVO.ann_img}" class="form-control">
+							<input type="file" name="ann_img" size="45" value="${announcementVO.ann_img}" class="form-control" onchange="showPreview(this.id,'portrait')" id="file">
+							<%if(announcementVO != null){ %>
+								  <img id="preview_progressbarTW_img" src="<%=request.getContextPath()%>/front-end/img/null.png">
+							 <% } else { %>
+							    <img id="preview_progressbarTW_img" src="#">
+							 <% } %>							
+						</div>
+						<div class="form-group">
+							<label>廣告狀態:</label>
+							 <select size="1" name="ann_status" class="form-control">
+							<option value="0"
+								${(announcementVO.ann_status ==0 ) ? 'selected':''}>下架
+							</option>
+							<option value="1"
+								${(announcementVO.ann_status ==1 ) ? 'selected':''}>上架
+							</option>
+							</select>
 						</div>
 						<input type="hidden" name="action" value="update">
 						<input type="hidden" name="ann_id" value="<%=announcementVO.getAnn_id()%>">
@@ -41,8 +56,23 @@
 				</div>
 			</div>
 	</div>
+	<script type="text/javascript">
+		/* 图片预览 */
+		function showPreview(fileId, imgId) {
+			var file = document.getElementById(fileId);
+			var ua = navigator.userAgent.toLowerCase();
+			var url = '';
+			if (/msie/.test(ua)) {
+				url = file.value;
+			} else {
+				url = window.URL.createObjectURL(file.files[0]);
+			}
+			document.getElementById(imgId).src = url;
+		}
+	</script>
 
-<%-- 錯誤表列 --%>
+
+	<%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font color='red'>請修正以下錯誤:
 	<ul>

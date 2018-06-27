@@ -102,30 +102,23 @@ public class DiscountServlet extends HttpServlet {
 				String dis_id = new String(req.getParameter("dis_id"));
 				DiscountService discountSvc = new DiscountService();
 				DiscountVO discountVO = discountSvc.getOneDiscount(dis_id);
-				
 				req.setAttribute("discountVO", discountVO); 
 				String url = "/back-end/discount/update_discount_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
-					
 				successView.forward(req, res);
 
 				
 			} catch (Exception e) {
-				errorMsgs.add("查無此資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount/discountList.jsp");
+			   RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount/discountList.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
 		if ("update".equals(action)) {
-
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 			try {
-			
 				String dis_id = new String(req.getParameter("dis_id").trim());
-
 				String dis_des = req.getParameter("dis_des").trim();
 				if (dis_des == null || dis_des.trim().length() == 0) {
 					errorMsgs.add("敘述請勿空白");
@@ -162,8 +155,7 @@ public class DiscountServlet extends HttpServlet {
 					dis_price_rate = 0.9;
 					errorMsgs.add("敘述請勿空白");
 				}
-
-				
+			
 				DiscountVO discountVO = new DiscountVO();
 				discountVO.setDis_id(dis_id);
 				discountVO.setDis_des(dis_des);
@@ -174,22 +166,20 @@ public class DiscountServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("discountVO", discountVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/update_discount_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount/discountList.jsp");
 					failureView.forward(req, res);
 					return; 
 				}
 
 				DiscountService discountSvc = new DiscountService();
 				discountVO = discountSvc.updateDiscount(dis_id, dis_des, dis_cup, dis_cup_rate, dis_price, dis_price_rate);
-						
 				req.setAttribute("discountVO", discountVO);
-				String url = "/back-end/discountList.jsp";
+				String url = "/back-end/discount/discountList.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
 			} catch (Exception e) {
-				errorMsgs.add("查無此資料" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount/update_discount_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount/discountList.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -208,7 +198,6 @@ public class DiscountServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
-				errorMsgs.add("查無此資料"+e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount/discountList.jsp");
 				failureView.forward(req, res);
 			}

@@ -74,7 +74,7 @@ public class ProductServlet extends HttpServlet {
 					
 				} catch (NumberFormatException e) {
 					product_price = 0;
-					errorMsgs.add("請輸入數字");
+					errorMsgs.add("格式不對");
 				}
 
 				String product_des = req.getParameter("product_des");
@@ -184,6 +184,23 @@ public class ProductServlet extends HttpServlet {
 		try {
 			    ProductService proSvc = new ProductService();
 			    ProductVo proVO = proSvc.upload(product_status, product_id);
+			    RequestDispatcher successView = req.getRequestDispatcher("/back-end/product/listAllProduct.jsp");
+				successView.forward(req, res);
+			} catch (Exception e) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/product/listAllProduct.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("down".equals(action)) {
+			List<String> errorMsgs;
+			errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String prono = req.getParameter("prono");
+			Integer product_status =Integer.parseInt(req.getParameter("product_status"));
+		try {
+			    ProductService proSvc = new ProductService();
+			    ProductVo proVO = proSvc.down(product_status, prono);
 			    RequestDispatcher successView = req.getRequestDispatcher("/back-end/product/listAllProduct.jsp");
 				successView.forward(req, res);
 			} catch (Exception e) {

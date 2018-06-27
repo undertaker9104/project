@@ -20,7 +20,27 @@ public class MemberVO implements Serializable {
 	private Integer mem_acc_status;
 	private byte[] mem_pic;
 	private byte[] mem_qrcode;
+
+	//
+	private String imgbase64;
 	
+	private String qrcodebase64;
+
+	public String getImgbase64() {
+		return imgbase64;
+	}
+
+	public void setImgbase64(String imgbase64) {
+		this.imgbase64 = imgbase64;
+	}
+
+	public String getQrcodebase64() {
+		return qrcodebase64;
+	}
+
+	public void setQrcodebase64(String qrcodebase64) {
+		this.qrcodebase64 = qrcodebase64;
+	}
 
 	public byte[] getMem_qrcode() {
 		return mem_qrcode;
@@ -138,7 +158,7 @@ public class MemberVO implements Serializable {
 		}
 		return src;
 	}
-	
+
 	public String getImg2(byte[] mem_qrcode) {
 		String src = null;
 		try {
@@ -149,7 +169,7 @@ public class MemberVO implements Serializable {
 		}
 		return src;
 	}
-	
+
 	//
 	public String getBase64Image() {
 		return Base64.getEncoder().encodeToString(mem_pic);

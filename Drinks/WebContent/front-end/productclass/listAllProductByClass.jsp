@@ -65,7 +65,7 @@
 					<input type="hidden" id="get_one" name="get_one" value="<%=pro_id%>" />
 					<input type="hidden" id="action" name="action" value="getOneProduct" />
 						
-					<% if (memVO != null) { %>
+		           <% if (memVO != null) { %>
 					<input type="hidden" name="shopCount" id="shopCount" value="1">
 					<button class="btn btn-info cartButton my-btn" type="button">
 						<span class="glyphicon glyphicon-shopping-cart" title="加入購物車"></span>
@@ -133,7 +133,7 @@
 				</div>
 				<%}%>
 			</div>
-			<%}%>
+		   <%}%>
 		</div>
 	</div>
 	<div style="height:10%;"></div>
@@ -244,6 +244,42 @@ $(document).ready(function(){
 	});
 })
 </script>
+<script type="text/javascript">
+function switchFavorite(e) {
+	var heart = e.target;
+ if (heart.title == "加入收藏") {
+		heart.className ="glyphicon glyphicon-heart track";
+		heart.title = "取消收藏";
+		$(this).parent().next().next().val('0');
+} else { 
+		heart.className = "glyphicon glyphicon-heart-empty track";
+		heart.title = "加入收藏";
+		$(this).parent().next().next().val('1');
+	}
+}
+function init() {
+	var hearts = document.getElementsByClassName("track");
+	for( var i=0; i< hearts.length; i++){
+		hearts[i].onclick = switchFavorite;
+	}
+}
+window.onload = init;
+
+$(document).ready(function(){
+	$(".trackButton").on("click",function(event){
+		
+	});
+})
+</script>
+<% if (memVO == null) { %>
+<script type="text/javascript">
+document.getElementsByClassName("cartButton").attr('disabled', false);
+</script>
+<%}else{ %>
+<script type="text/javascript">
+document.getElementsByClassName("cartButton").attr('disabled', '');
+</script>
+<%}%>
 <script src="<%=request.getContextPath()%>/front-end/js/flyto.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>

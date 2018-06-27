@@ -10,13 +10,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公告詳情 </title></head>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/bootstrap.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/front.css" type="text/css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/bootstrap.min.css"">
 <body>
 
 		<jsp:include page="/front-end/header.jsp" />
+
 	<br><br>
 	<div class="container">
 			<div class="row">
@@ -27,10 +29,10 @@
 					</div>				
 					<hr/>
 					<c:if test="${empty announcementVO.ann_img}">
-						<img src="<%=request.getContextPath()%>/img/test.jpg">
+						<img src="<%=request.getContextPath()%>/front-end/img/null.png">					
 					</c:if> 
 					<c:if test="${! empty announcementVO.ann_img}">
-						<img src="data:image/png;base64,${announcementVO.getImg(announcementVO.ann_img)}"  width="100%" height="100%"/>
+						<img src="data:image/jpg;base64,${announcementVO.getBase64Image()}" width="100%" height="100%">
 					</c:if>
 						<p style="font-size:20px">${announcementVO.ann_des}</p>
 				</div>

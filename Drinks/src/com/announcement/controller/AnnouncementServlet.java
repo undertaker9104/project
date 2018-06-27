@@ -51,38 +51,50 @@ public class AnnouncementServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 				
+//				byte[] ann_img = null;
+//				Part filePart = req.getPart("ann_img");
+//				InputStream in = null;
+//				if (filePart != null) {
+//					in = filePart.getInputStream();
+//					ann_img = new byte[in.available()];
+//					in.read(ann_img);
+//				} else {
+//					errorMsgs.add("請選擇上傳圖片");
+//				}
+
 				byte[] ann_img = null;
 				Part filePart = req.getPart("ann_img");
-				InputStream in = null;
+				InputStream is = null;
 				if (filePart != null) {
-					in = filePart.getInputStream();
-					ann_img = new byte[in.available()];
-					in.read(ann_img);
-				} else {
-					errorMsgs.add("請選擇上傳圖片");
+					is = filePart.getInputStream();
+					ann_img = new byte[is.available()];
+					is.read(ann_img);
 				}
-
+				
+				Integer ann_status = Integer.parseInt(req.getParameter("ann_status"));
+				
 				AnnouncementVO announcementVO = new AnnouncementVO();
 				announcementVO.setAnn_title(ann_title);
 				announcementVO.setAnn_des(ann_des);
 				announcementVO.setAnn_date(ann_date);
 				announcementVO.setAnn_img(ann_img);
+				announcementVO.setAnn_status(ann_status);
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("announcementVO", announcementVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/announcementAdd.jsp");
+							.getRequestDispatcher("/back-end/announcement/announcementAdd.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始新增資料***************************************/
 				AnnouncementService announcementSvc = new AnnouncementService();
-				announcementVO = announcementSvc.addAnnouncement(ann_title, ann_des, ann_date, ann_img);
+				announcementVO = announcementSvc.addAnnouncement(ann_title, ann_des, ann_date, ann_img, ann_status);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back-end/announcementList.jsp";
+				String url = "/back-end/announcement/announcementList.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交announcementList.jsp
 				successView.forward(req, res);				
 				
@@ -90,7 +102,7 @@ public class AnnouncementServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/announcementAdd.jsp");
+						.getRequestDispatcher("/back-end/announcement/announcementAdd.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -156,23 +168,37 @@ public class AnnouncementServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 				
+//				byte[] ann_img = null;
+//				Part filePart = req.getPart("ann_img");
+//				InputStream in = null;
+//				if (filePart != null) {
+//					in = filePart.getInputStream();
+//					ann_img = new byte[in.available()];
+//					in.read(ann_img);
+//				} else {
+//					errorMsgs.add("請選擇上傳圖片");
+//				}
+				
 				byte[] ann_img = null;
 				Part filePart = req.getPart("ann_img");
-				InputStream in = null;
-				if (filePart != null) {
-					in = filePart.getInputStream();
-					ann_img = new byte[in.available()];
-					in.read(ann_img);
-				} else {
-					errorMsgs.add("請選擇上傳圖片");
+				InputStream is =filePart.getInputStream();
+				if(is.available() != 0){
+					ann_img = new byte[is.available()];
+					is.read(ann_img);
+				}else{
+					AnnouncementService announcementSvc = new AnnouncementService();
+					ann_img = announcementSvc.getOneAnnouncement(ann_id).getAnn_img();
 				}
 				
+				Integer ann_status = Integer.parseInt(req.getParameter("ann_status"));
+								
 				AnnouncementVO announcementVO = new AnnouncementVO();
 				announcementVO.setAnn_id(ann_id);
 				announcementVO.setAnn_title(ann_title);
 				announcementVO.setAnn_des(ann_des);
 				announcementVO.setAnn_date(ann_date);
 				announcementVO.setAnn_img(ann_img);
+				announcementVO.setAnn_status(ann_status);
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -184,7 +210,7 @@ public class AnnouncementServlet extends HttpServlet {
 
 				/*************************** 2.開始修改資料 *****************************************/
 				AnnouncementService announcementSvc = new AnnouncementService();
-				announcementVO = announcementSvc.updateAnnouncement(ann_id, ann_title, ann_des, ann_date, ann_img);
+				announcementVO = announcementSvc.updateAnnouncement(ann_id, ann_title, ann_des, ann_date, ann_img, ann_status);
 				
 				/***************************
 				 * 3.修改完成,準備轉交(Send the Success view)

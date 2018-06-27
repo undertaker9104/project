@@ -18,11 +18,10 @@ public class ProductClassService {
 		return proClsVO;
 	}
 
-	public ProductClassVo update(String product_class_id,String product_class_name,Integer product_class_status) {
+	public ProductClassVo update(String product_class_id,String product_class_name) {
 		ProductClassVo productClassVO = new ProductClassVo();
 		productClassVO.setProduct_cl_id(product_class_id);
 		productClassVO.setProduct_cl_name(product_class_name);
-		productClassVO.setProduct_cl_status(product_class_status);
 		dao.update(productClassVO);
 		return productClassVO;
 	}
@@ -49,5 +48,15 @@ public class ProductClassService {
 		dao.upload(productClassVO);
 		return productClassVO;
 	}
+	
+	
+	public ProductClassVo down(String product_class_id,Integer product_class_status) {
+		ProductClassVo productClassVO = new ProductClassVo();
+		productClassVO.setProduct_cl_id(product_class_id);
+	    productClassVO.setProduct_cl_status(product_class_status);
+		dao.down(productClassVO);
+		return productClassVO;
+	}
+	
 	
 }

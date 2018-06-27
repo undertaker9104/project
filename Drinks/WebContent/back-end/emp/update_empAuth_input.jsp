@@ -15,6 +15,8 @@ List<String> list =(List<String>) request.getAttribute("list");
 
 <style>
   table#table-1 {
+	background-color: #CCCCFF;
+    border: 2px solid black;
     text-align: center;
   }
   table#table-1 h4 {
@@ -78,11 +80,11 @@ List<String> list =(List<String>) request.getAttribute("list");
 </head>
 <body bgcolor='white'>
 
-<table id="table-1" align="center">
-	<tr><td>
-		 <h1>員工職稱修改</h1>
-	</td></tr>
-</table>
+
+<div align="center" style="
+    padding-top:5%;
+"><img src="<%=request.getContextPath()%>/front-end/pic/333.png" style="width: 30px; height: 30px ; align:center"><font style="font-family:微軟正黑體;font-weight:bold;font-size:2em">員工職位修改</font>
+</div>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">

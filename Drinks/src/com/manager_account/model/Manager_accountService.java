@@ -59,4 +59,12 @@ public class Manager_accountService {
 	public List<Manager_accountVO> getOutAll() {
 		return dao.getOutAll();
 	}
+	
+	public boolean isManager(String man_acc_id,String accpw){
+		return dao.isManager(man_acc_id, accpw);
+	}
+	public boolean update(String man_acc_id,Integer man_acc_status){
+		return dao.update(man_acc_id, man_acc_status);
+	}
+
 }

@@ -5,6 +5,7 @@ public interface ProductClassDao_interface {
 	
 	 public void add(ProductClassVo producclassVo);
      public void update(ProductClassVo producclassVo);
+     public void down(ProductClassVo producclassVo);
      public ProductClassVo findByPK(String procl_id);
 	 List<ProductClassVo> getAll();
 	 List<ProductClassVo> getAllFront();

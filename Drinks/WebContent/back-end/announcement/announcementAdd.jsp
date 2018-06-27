@@ -9,27 +9,26 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>增加公告</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/back-end/css/bootstrap.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/bootstrap.css">
 </head>
 <body>
-
 <div class="container">
-	<jsp:include page="/front-end/header.jsp" />
-
+	<div class="row">
+				<div class="container col-md-8 col-md-offset-2">
 	<br><br>
-	<form class="form-horizontal" METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/announcement.do" enctype="multipart/form-data" name="form1">
+	<form class="form-horizontal"   METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/announcement.do" enctype="multipart/form-data" name="form1">
 		
 		
 		<div class="form-group">
 			<label for="input_name" class="col-sm-1 control-label">公告標題:</label>
 			<div class="col-sm-6">
-				<input type="TEXT" class="form-control" name="ann_title" size="45" value="${announcementVO.ann_title}title" />
+				<input type="TEXT" class="form-control" name="ann_title" size="45" value="${announcementVO.ann_title}" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="input_name" class="col-sm-1 control-label">公告內容:</label>
 			<div class="col-sm-6">
-				<input type="TEXT" class="form-control" name="ann_des" size="45" value="${announcementVO.ann_des}des" />
+				<input type="TEXT" class="form-control" name="ann_des" size="45" value="${announcementVO.ann_des}" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -41,7 +40,21 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 		<div class="form-group">
 			<label for="input_name" class="col-sm-1 control-label">圖片:	</label>
 			<div class="col-sm-6">
-				<input type="file" class="form-control" name="ann_img" size="45" value="${announcementVO.ann_img}" />
+				<input type="file" class="form-control" name="ann_img" size="45" value="${announcementVO.ann_img}" onchange="showPreview(this.id,'portrait')" id="file"/>
+				<img src="" id="portrait" style="width: 100%; height: 100%; display: block;" />	
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="input_name" class="col-sm-1 control-label">廣告狀態:	</label>
+			<div class="col-sm-6">
+				<select size="1" name="ann_status" class="form-control">
+					<option value="0" ${(announcementVO.ann_status ==0 ) ? 'selected':''}>
+									下架
+					</option>
+					<option value="1" ${(announcementVO.ann_status ==1 ) ? 'selected':''}>
+									上架
+					</option>
+				</select>
 			</div>
 		</div>
 		
@@ -53,6 +66,22 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 		</div>
 	</form>
 </div>
+</div>
+</div>
+<script type="text/javascript">
+		/* 图片预览 */
+		function showPreview(fileId, imgId) {
+			var file = document.getElementById(fileId);
+			var ua = navigator.userAgent.toLowerCase();
+			var url = '';
+			if (/msie/.test(ua)) {
+				url = file.value;
+			} else {
+				url = window.URL.createObjectURL(file.files[0]);
+			}
+			document.getElementById(imgId).src = url;
+		}
+	</script>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -96,8 +125,8 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 		   value: '<%=ann_date%>', // value:   new Date(),
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+           minDate:               '-1970-01-01', // 去除今日(不含)之前
+           maxDate:               '+1970-01-01'  // 去除今日(不含)之後
         });
 </script>
 </body>

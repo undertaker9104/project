@@ -2,7 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.point_exc_cash.model.*"%>
-
+<%@ page import="com.manager_account.model.*"%>
+<%@ page import="com.manager_account_authority.model.*"%>
+<%
+Manager_accountVO manager_accountVO = (Manager_accountVO) session.getAttribute("manager_accountVO");
+System.out.print(manager_accountVO.getMan_acc_id());
+Manager_account_authorityService manager_account_authoritySvc = new Manager_account_authorityService();
+List<String> list1 = manager_account_authoritySvc.getOneManager_account_authority(manager_accountVO.getMan_acc_id());
+if(!list1.contains("AC000001")){
+	   out.println("<script language=\"javascript\">");
+	   out.println("alert(\"您尚未有管理權限\");");
+	   out.println("window.history.back(-1);");  
+	   out.println("</script>");
+}
+%>
 <%
 	Point_exc_cashVO point_exc_cashVO = (Point_exc_cashVO) request.getAttribute("point_exc_cashVO");
 %>
@@ -16,24 +29,7 @@
 <head>
 <title>所有點數兌換待審核資料</title>
 
-<style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-</style>
 
 <style>
 table {
@@ -81,6 +77,21 @@ th, td {
 	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 	text-decoration: none;
 }
+
+#table-1 {
+	text-align: center;
+	border:0px;
+}
+
+#table-1 h4 {
+	color: red;
+	display: block;
+	margin-bottom: 1px;
+}
+
+h4 {
+	display: inline;
+}
 </style>
 
 </head>
@@ -93,10 +104,15 @@ th, td {
 			<div class="col-xs-12 col-sm-9">
 				<div class="page-header text-left">
 					<div class="h1">
-						管理介面<small>所有點數兌換待審核資料</small>
+						管理介面<small>點數兌換管理</small>
 					</div>
 				</div>
-				<table id="table-1">
+				<table id="table-1" align="center" >
+					<tr>
+						<td style="width: 451.979166px; border:0px">
+							<h3><font style="font-family:微軟正黑體;font-weight:bold; font-weight:1.5em; font-size:1.5em" >點數兌換待審核資料</font>
+						</td>
+					</tr>
 				</table>
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
@@ -110,7 +126,10 @@ th, td {
 
 				<table>
 					<tr>
-						<th>兌換記錄編號</th>
+						<th style="
+    height: 51.979166px;
+    width: 76.979166px;
+">兌換記錄編號</th>
 						<th>會員編號</th>
 						<th>兌換申請時間</th>
 						<th>兌換現金</th>
@@ -144,9 +163,11 @@ th, td {
 					</c:forEach>
 				</table>
 				<%@ include file="pages/page2.file"%>
+				  <li><a href='<%=request.getContextPath()%>/back-end/mem/listAllcomplete.jsp'>List</a> all 已審核</li>
 			</div>
 		</div>
 	</div>
+	
 	<script src="https://code.jquery.com/jquery.js"></script>
 </body>
 </html>

@@ -23,7 +23,7 @@
 				<div class="page-header text-left">
 					<div class="h1">管理介面<small>揪團文章管理</small></div>
 				</div>
-				<table class="table table-hover" style="border: 1px solid black">
+				<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>文章名稱</th>

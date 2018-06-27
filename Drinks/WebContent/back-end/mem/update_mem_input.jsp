@@ -13,18 +13,7 @@
 <title>會員資料修改</title>
 
 <style>
-  table#table-1 {
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+
 </style>
 
 <style>
@@ -35,6 +24,10 @@
 	margin-bottom: 1px;
   }
   table, th, td {
+    table-layout:fixed;
+  word-break:break-all;
+  word-warp:break-word;
+    border: 0px solid #CCCCFF;
   }
   th{
    text-align:right;
@@ -81,8 +74,8 @@
 <body bgcolor='white'>
 
 <table id="table-1" align="center">
-	<tr><td>
-		 <h3>會員資料修改</h3>
+	<tr>
+		<td height="141" colspan="5" align="center" valign="middle"><img src="<%=request.getContextPath()%>/front-end/pic/333.png" style="width: 30px; height: 30px"><font style="font-family:微軟正黑體;font-weight:bold;font-size:2em">會員資料修改</font>
 	</td></tr>
 </table>
 
@@ -97,7 +90,7 @@
 </c:if>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/MemberServlet" enctype="multipart/form-data">
-<table align="center">
+<table  align="center">
 	<tr>
 		<th>會員編號:</th>
 		<td><%=memberVO.getMem_id()%></td>
@@ -144,7 +137,7 @@
 	</tr>
 	<tr>
 		<th>會員狀態</th>
-		<td><input type="TEXT" name="mem_acc_status" size="45"	value="<%=memberVO.getMem_acc_status()%>" /></td>
+		<td><input type="TEXT" name="mem_acc_status" size="25"	value="<%=memberVO.getMem_acc_status()%>" />(0:正常  1:停權)</td>
 	</tr>
 	<tr>
 		<th style="

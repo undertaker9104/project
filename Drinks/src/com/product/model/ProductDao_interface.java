@@ -6,6 +6,7 @@ public interface ProductDao_interface {
 	
      public void add(ProductVo productVo);
      public void update(ProductVo productVo);
+     public void down(ProductVo productVo);
      public void updatePhoto(ProductVo productVo);
      public ProductVo findByPK(String member);
 	 List<ProductVo> getAll();

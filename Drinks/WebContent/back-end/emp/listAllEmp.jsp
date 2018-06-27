@@ -96,9 +96,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<div class="page-header text-left">
-					<div class="h1">管理介面<small>所有員工資料</small></div>
-				</div>
+
 <table>
 	<tr>
 		<th>員工編號</th>

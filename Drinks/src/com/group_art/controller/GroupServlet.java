@@ -53,7 +53,7 @@ public class GroupServlet extends HttpServlet {
 			}
 			
 		};
-		timer.scheduleAtFixedRate(timerTask,0, 1000*60);
+		timer.scheduleAtFixedRate(timerTask,0, 3000);
 	}
 	
 	

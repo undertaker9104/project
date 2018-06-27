@@ -1,5 +1,6 @@
 package com.mem.model;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class MemberService {
@@ -10,7 +11,7 @@ public class MemberService {
 	}
 
 	public MemberVO addMem(String mem_name, String mem_email, String mem_pwd, String mem_sex, java.sql.Date mem_birth,
-			String mem_phone, String mem_ads, byte[] mem_pic,byte[] mem_qrcode) {
+			String mem_phone, String mem_ads, byte[] mem_pic, byte[] mem_qrcode) {
 
 		MemberVO MemberVO = new MemberVO();
 
@@ -55,7 +56,7 @@ public class MemberService {
 
 		return MemberVO;
 	}
-	
+
 	public MemberVO updateMem_Point(String mem_id, Integer mem_point) {
 		MemberVO MemberVO = new MemberVO();
 
@@ -81,10 +82,22 @@ public class MemberService {
 	public List<MemberVO> getAll() {
 		return dao.getAll();
 	}
+
 	public MemberVO getMem_id(String mem_id) {
 		return dao.findMem_id(mem_id);
 	}
+
 	public MemberVO getImg(String mem_id) {
 		return dao.findimg(mem_id);
+	}
+
+	// Android使用
+	public boolean isMember(String mem_email, String mem_pwd) {
+		return dao.isMember(mem_email, mem_pwd);
+	}
+
+	// Android使用
+	public void update(String mem_id, Integer mem_point, Connection con) {
+		dao.update(mem_id, mem_point, con);
 	}
 }

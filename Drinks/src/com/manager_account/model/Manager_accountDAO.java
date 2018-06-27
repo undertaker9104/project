@@ -27,7 +27,8 @@ public class Manager_accountDAO implements Manager_accountDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO Manager_account (man_acc_id,accpw,man_acc_status,emp_name,emp_img,emp_email) VALUES ('MA'||LPAD(to_char(manager_account_seq.NEXTVAL), 6, '0'), ?, 0, ?, ? ,?  )";
 
 	private static final String UPDATE = "UPDATE Manager_account set accpw=?, man_acc_status=?, emp_name=?, emp_img=? ,emp_email=? where man_acc_id = ?";
-
+	private static final String UPDATE_STATUS = "UPDATE manager_account SET man_acc_status=? where man_acc_id=?";
+	
 	private static final String DELETE = "DELETE FROM Manager_account where man_acc_id = ?";
 
 	private static final String GET_ONE_STMT = "SELECT man_acc_id,accpw,man_acc_status,emp_name,emp_img,emp_email FROM Manager_account where man_acc_id = ?";
@@ -38,6 +39,8 @@ public class Manager_accountDAO implements Manager_accountDAO_interface {
 
 	private static final String GET_ALLOUT_STMT = "SELECT * FROM MANAGER_ACCOUNT where AUTHORITY_ID='AC000002' order by man_acc_id";
 
+	private static final String FIND_BY_ID_PWD = "SELECT * FROM manager_account WHERE man_acc_id = ? AND accpw = ?";
+	
 	@Override
 	public void insert(Manager_accountVO manager_accountVO) {
 		Connection con = null;
@@ -370,5 +373,72 @@ public class Manager_accountDAO implements Manager_accountDAO_interface {
 	}
 		return list;
 	
+	}
+
+	@Override
+	public boolean isManager(String man_acc_id, String accpw) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		boolean isManager = false;
+		try {
+			con = ds.getConnection();
+			ps = con.prepareStatement(FIND_BY_ID_PWD);
+			ps.setString(1, man_acc_id);
+			ps.setString(2, accpw);
+			ResultSet rs = ps.executeQuery();
+			isManager = rs.next();
+			return isManager;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return isManager;
+	}
+
+	@Override
+	public boolean update(String man_acc_id, Integer man_acc_status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean update = false;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+
+			pstmt.setInt(1,man_acc_status );
+			pstmt.setString(2,man_acc_id);
+	
+			int count = pstmt.executeUpdate();
+			update = count > 0 ? true : false; 
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return update;
 	}
 }

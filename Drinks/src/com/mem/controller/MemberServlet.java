@@ -2,6 +2,7 @@ package com.mem.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.json.JSONObject;
 
 import com.mem.model.MailService;
 import com.mem.model.MemberService;
@@ -118,26 +120,35 @@ public class MemberServlet extends HttpServlet {
 		}
 
 		/*************************** 註冊 ****************************************/
-		if ("Register".equals(action)) {
+if ("Register".equals(action)) {
+			
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
+			PrintWriter out = response.getWriter();
+			Boolean isDone=true;
 			try {
 				String mem_name = request.getParameter("username");
 				if (mem_name == null || (mem_name.trim()).length() == 0) {
 					errorMsgs.add("請輸入使用者名稱");
 				}
+				
 				String mem_email = request.getParameter("email");
 				if (mem_email == null || (mem_email.trim()).length() == 0) {
 					errorMsgs.add("請輸入您的Email");
 				}
+				System.out.println(mem_email);
 				String mem_pwd = request.getParameter("password");
 				if (mem_pwd == null || (mem_pwd.trim()).length() == 0) {
 					errorMsgs.add("請輸入您的password");
 				}
+			
 				String mem_sex = request.getParameter("sex");
 				if (mem_sex == null || (mem_sex.trim()).length() == 0) {
 					errorMsgs.add("請輸入您的性別");
 				}
+				
+				
 				java.sql.Date mem_birth = null;
 				try {
 					mem_birth = java.sql.Date.valueOf(request.getParameter("birthday").trim());
@@ -145,6 +156,7 @@ public class MemberServlet extends HttpServlet {
 					mem_birth = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
+			
 				String mem_phone = request.getParameter("phone");
 				String phoneReg = "^09[0-9]{8}$";
 				if (mem_phone == null || (mem_phone.trim()).length() == 0) {
@@ -152,12 +164,15 @@ public class MemberServlet extends HttpServlet {
 				} else if (!mem_phone.trim().matches(phoneReg)) {
 					errorMsgs.add("請輸入您的手機格式錯誤");
 				}
+				
 				String mem_ads = request.getParameter("address");
 				if (mem_ads == null || (mem_ads.trim()).length() == 0) {
 					errorMsgs.add("請輸入您的地址");
 				}
+				
+				
 				byte[] mem_pic = null;
-				Part filePart = request.getPart("mem_pic");
+				Part filePart = request.getPart("file");
 				InputStream in = null;
 				if (filePart != null) {
 					in = filePart.getInputStream();
@@ -167,7 +182,26 @@ public class MemberServlet extends HttpServlet {
 					errorMsgs.add("請選擇上傳圖片");
 				}
 				
+				
+				if (!errorMsgs.isEmpty()) {
 			
+					JSONObject obj = new JSONObject();
+					isDone = false;
+					try{
+					
+						obj.put("errorMsgs",errorMsgs);
+						obj.put("isDone",isDone);
+					}catch(Exception e){}
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					out.print(obj);
+					out.flush();
+					out.close();
+					//RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/register.jsp");
+					//failureView.forward(request, response);
+					return;
+				}
+				
 				String details = "Member_name :"+ mem_name ;
 				String details2 = new String(details.getBytes("UTF-8"),"ISO-8859-1");
 				ByteArrayOutputStream bos = QRCode.from(details2).to(ImageType.PNG).withSize(500, 500).stream();
@@ -180,6 +214,7 @@ public class MemberServlet extends HttpServlet {
 				if (memVO1 != null) {
 					errorMsgs.add("信箱已被註冊，請重新輸入");
 				}
+				
 				MemberVO memVO = new MemberVO();
 				memVO.setMem_name(mem_name);
 				memVO.setMem_email(mem_email);
@@ -191,13 +226,27 @@ public class MemberServlet extends HttpServlet {
 				memVO.setMem_pic(mem_pic);
 				memVO.setMem_qrcode(mem_qrcode);
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/register.jsp");
-					failureView.forward(request, response);
+					
+					JSONObject obj = new JSONObject();
+					isDone = false;
+					try{
+						obj.put("errorMsgs",errorMsgs);
+						obj.put("isDone",isDone);
+					}catch(Exception e){}
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					out.print(obj);
+					out.flush();
+					out.close();
+					//RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/register.jsp");
+					//failureView.forward(request, response);
 					return;
 				}
 				memSvc.addMem(mem_name, mem_email, mem_pwd, mem_sex, mem_birth, mem_phone, mem_ads, mem_pic , mem_qrcode);
-				RequestDispatcher success = request.getRequestDispatcher("/front-end/mem/register_success.jsp");
-				success.forward(request, response);
+				JSONObject obj = new JSONObject();
+				out.print(obj);
+				//RequestDispatcher success = request.getRequestDispatcher("/front-end/mem/register_success.jsp");
+				//success.forward(request, response);
 			} catch (Exception e) {
 				errorMsgs.add("註冊失敗 請重新註冊");
 				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/register.jsp");

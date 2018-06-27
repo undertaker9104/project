@@ -1,6 +1,7 @@
 package com.mem.model;
 
 import java.util.List;
+import java.sql.Connection;
 
 public interface Member_interface {
 	public void insert(MemberVO MemberVO);
@@ -22,5 +23,10 @@ public interface Member_interface {
     public MemberVO findMem_id(String mem_id);
 	
 	public MemberVO findimg(String mem_id);
+	
+	public void update(String mem_id,Integer mem_point,Connection con);
+	
+	public boolean isMember(String mem_email, String mem_pwd);
+
 
 }

@@ -44,10 +44,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="front-image/mycss.css">
-<!--[if lt IE 9]>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
 
 <style>
@@ -157,18 +153,28 @@ font-size:30px;
 	<br>
 	<div class="container-fluid send-locat">
 		<div class="row">
+       
 		    <div class="col-xs-12 col-sm-3 "></div>
-			<div class="col-xs-12 col-sm-3 send-locat"><b>主揪者:${mSvc.getImg(list.mem_id).mem_name}</b></div>
+   
+			<div class="col-xs-12 col-sm-3 send-locat" style="margin-top:0.5%;">
+			   
+			<b>主揪者:<img src="data:image/jpg;base64,${mSvc.getOneMem_id(list.mem_id).getBase64Image()}"
+			    class="img-circle" style="width: 100px; height:100px;">${mSvc.getOneMem_id(list.mem_id).mem_name}</b><br>
+		    </div>
+			<br>
 			<div class="col-xs-12 col-sm-3 ship-locat"><b>外送地點:${list.send_locat}</b></div>	
+				
 			<div class="col-xs-12 col-sm-3 "></div>								
-										
+								
 		</div>
 	</div>
 	<div class="container-fluid date">
 		<div class="row">
 		    <div class="col-xs-12 col-sm-3 "></div>
-			<div class="col-xs-12 col-sm-3 send-locat"><b>取貨地點:${list.ship_locat}</b></div>
-			<div class="col-xs-12 col-sm-3 ship-locat"><b>截止日期:${list.exp_date}</b></div>		
+	
+			<div class="col-xs-12 col-sm-3 send-locat" style="margin-top:1.5%;"><b>取貨地點:${list.ship_locat}</b></div>
+			<br>
+			<div class="col-xs-12 col-sm-3 ship-locat" style="margin-top:0.5%;"><b>截止日期:${list.exp_date}</b></div>	
 			<div class="col-xs-12 col-sm-3 "></div>																	
 		</div>
 	</div>

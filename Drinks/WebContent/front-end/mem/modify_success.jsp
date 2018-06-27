@@ -14,7 +14,7 @@
 			       <h3>恭喜您  ， 修改成功  </h3> 
 				   <h3>一百秒後，自動為您跳轉會員畫面</h3>
 				   <h3>不想等請點擊<a href="<%=request.getContextPath()%>/front-end/mem/modify.jsp">立即跳轉</a></h3>
-				  <% response.setHeader("Refresh","100;url= "+request.getContextPath()+"/front-end/mem/modify.jsp") ;%> 
+				  <% response.setHeader("Refresh","1;url= "+request.getContextPath()+"/front-end/mem/modify.jsp") ;%> 
 			 </td>
 		</tr>
 	</table>

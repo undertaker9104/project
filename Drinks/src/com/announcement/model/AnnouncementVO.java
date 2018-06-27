@@ -12,7 +12,9 @@ public class AnnouncementVO implements java.io.Serializable {
 	private String ann_des;
 	private Date ann_date;
 	private byte[] ann_img;
+	private Integer ann_status;
 
+	
 	public String getAnn_id() {
 		return ann_id;
 	}
@@ -53,16 +55,22 @@ public class AnnouncementVO implements java.io.Serializable {
 		this.ann_img = ann_img;
 	}
 
-	public String getImg(byte[] ann_img) {
-		String src = null;
-		try {
-			src = new String(Base64.getEncoder().encode(ann_img));
-		} catch (Exception e) {
-			src = " ";
-		}
-		return src;
+	public String getBase64Image(){
+		return Base64.getEncoder().encodeToString(ann_img);
+	}
+	
+	public void setImage(byte[] ann_img){
+		this.ann_img = ann_img;
+	}
+	
+	public Integer getAnn_status() {
+		return ann_status;
 	}
 
+	public void setAnn_status(Integer ann_status) {
+		this.ann_status = ann_status;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

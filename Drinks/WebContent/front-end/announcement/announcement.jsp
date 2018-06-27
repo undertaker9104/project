@@ -6,7 +6,7 @@
 
 <%
 	AnnouncementService announcementSvc = new AnnouncementService();
-	List<AnnouncementVO> list = announcementSvc.getAll();
+	List<AnnouncementVO> list = announcementSvc.getAllDesc();
 	pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -41,10 +41,10 @@
 						<dd>${announcementVO.ann_title}</dd>
 						<dd>
 							<c:if test="${empty announcementVO.ann_img}">
-								<img style="width: 170px; height: 170px;"src="<%=request.getContextPath()%>/img/test.jpg">
+								<img style="width: 170px; height: 170px;"src="<%=request.getContextPath()%>/front-end/img/null.png">
 							</c:if> 
 							<c:if test="${! empty announcementVO.ann_img}">
-								<img src="data:image/png;base64,${announcementVO.getImg(announcementVO.ann_img)}" width="50%" height="50%"/>
+								<img src="data:image/png;base64,${announcementVO.getBase64Image()}" width="50%" height="50%"/>
 							</c:if>
 						</dd>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/announcementFront.do">
@@ -59,8 +59,8 @@
 			</div>
 		</div>
 	</div>
-
-
+<br>
+<br>
 <jsp:include page="/front-end/footer.jsp" />
 
 </body>

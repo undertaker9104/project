@@ -58,6 +58,7 @@ img {
 						<th>狀態</th>
 						<th>操作</th>
 						<th>上傳圖片</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -90,6 +91,15 @@ img {
 									<input type="hidden" name="prono" value="${ product.product_id }">
 									<input type="hidden" name="action" value="upPhoto">
 									<input type="submit" class="btn btn-primary btn-lg" value="上傳">
+								</form>
+							</td>
+							<td>
+								<form method="post"
+									action="<%=request.getContextPath()%>/product.do">
+									<input type="hidden" name="prono" value="${ product.product_id }">
+									<input type="hidden" name="action" value="down">
+									<input type="hidden" name="product_status" value="0">
+									<input type="submit" class="btn btn-primary btn-lg" value="下架">
 								</form>
 							</td>
 						</tr>

@@ -262,7 +262,7 @@ public class ShoppingCartServlet extends HttpServlet {
 					}
 
 					RequestDispatcher successView = req
-							.getRequestDispatcher("/front-end/shoppingcart/shoppingcart.jsp");
+							.getRequestDispatcher("/front-end/mem/storedPoint.jsp");
 					successView.forward(req, res);
 
 				} else {
@@ -352,12 +352,12 @@ public class ShoppingCartServlet extends HttpServlet {
 			req.getSession().setAttribute("quantity", quenty);
 			req.getSession().setAttribute("addProduct_action", action);
 
-			System.out.println("addProduct_id:" + addProduct_id);
-			System.out.println("sweet_id:" + sweet_id);
-			System.out.println("buy_mem_id:" + buy_mem_id);
-			System.out.println("ice_id:" + ice_id);
-			System.out.println("quenty:" + quenty);
-			System.out.println("action:" + action);
+//			System.out.println("addProduct_id:" + addProduct_id);
+//			System.out.println("sweet_id:" + sweet_id);
+//			System.out.println("buy_mem_id:" + buy_mem_id);
+//			System.out.println("ice_id:" + ice_id);
+//			System.out.println("quenty:" + quenty);
+//			System.out.println("action:" + action);
 
 			ProductService proSve = new ProductService();
 			ProductVo proVo = proSve.getOneProduct(addProduct_id);

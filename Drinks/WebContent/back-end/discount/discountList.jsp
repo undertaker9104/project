@@ -44,8 +44,7 @@
 							<td>${discountVO.dis_price}</td>
 							<td>${discountVO.dis_price_rate}</td>
 							<td>
-								<FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/back-end/discount.do">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/discount.do">
 									<input type="submit" value="修改" class="btn btn-primary">
 									<input type="hidden" name="dis_id" value="${discountVO.dis_id}">
 									<input type="hidden" name="action" value="getOne_For_Update">

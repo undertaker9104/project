@@ -1,5 +1,7 @@
 package com.ordermaster.model;
 
+import java.util.List;
+
 public class OrderMasterVo implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -12,13 +14,25 @@ public class OrderMasterVo implements java.io.Serializable{
 	private Integer ship_option;
 	private Integer ord_status;
 	
+	//
+   private List<CartVO> orderProductList;
+	
+	public List<CartVO> getOrderProductList() {
+		return orderProductList;
+	}
+
+	public void setOrderProductList(List<CartVO> orderProductList) {
+		this.orderProductList = orderProductList;
+	}
+
+	
 	
 	public OrderMasterVo() {
 		super();
 		
 	}
 
-
+//
 	public OrderMasterVo(String ord_id, String mem_id, String man_acc_id, Integer grou, String oute_add,
 			Integer ship_option, Integer ord_status) {
 		super();

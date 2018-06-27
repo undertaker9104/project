@@ -24,18 +24,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
-				<div class="page-header text-left">
-					<div class="h1">留言版</div>
-				</div>
+				
 				<c:forEach items="${listmsg}" var="msgVo">
-					<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+					<div class="col-xs-12 col-sm-9 col-sm-offset-2">
 						<div class="media">
 							<div class="media-left">
-								<img src="data:image/jpg;base64,${memSrc.getOneMem_id(msgVo.mem_id).getBase64Image()}" class="media-object" style="width: 60px; height: 60px">
+							   <img src="data:image/jpg;base64,${memSrc.getOneMem_id(msgVo.mem_id).getBase64Image()}" class="media-object" style="width: 100px; height: 100px">
 							</div>
 							<div class="media-body">
-								<h4 class="media-heading"> ${memSrc.getOneMem_id(msgVo.mem_id).mem_name}</h4>
-								<p>${msgVo.msg_des}</p>
+							    <h4 class="media-heading" style="font-size: 32px"> <b>${memSrc.getOneMem_id(msgVo.mem_id).mem_name}</b></h4>
+								<div style="font-size: 32px">${msgVo.msg_des}</div>
 							</div>
 						</div>
 					</div>

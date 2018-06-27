@@ -68,9 +68,9 @@ Insert into MEMBER (MEM_ID,MEM_NAME,MEM_EMAIL,MEM_PWD,MEM_SEX,MEM_BIRTH,MEM_PHON
 Insert into MEMBER (MEM_ID,MEM_NAME,MEM_EMAIL,MEM_PWD,MEM_SEX,MEM_BIRTH,MEM_PHONE,MEM_ADS,MEM_POINT,MEM_INT,MEM_ACC_STATUS) values ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0')
 ,'李四','member2@yahoo.com.tw','member2','男',TO_DATE('1993-04-07','YYYY-MM-DD'),'0937648903','蘆竹區大竹路562號',500,300,1);
 Insert into MEMBER (MEM_ID,MEM_NAME,MEM_EMAIL,MEM_PWD,MEM_SEX,MEM_BIRTH,MEM_PHONE,MEM_ADS,MEM_POINT,MEM_INT,MEM_ACC_STATUS) values ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0')
-,'王五','member3@yahoo.com.tw','member3','女',TO_DATE('1981-09-03','YYYY-MM-DD'),'0933111973','桃園市中正路1692號',500,5,0);
+,'王五','ca101g2db@gmail.com','1','女',TO_DATE('1981-09-03','YYYY-MM-DD'),'0933111973','桃園市中正路1692號',500,5,0);
 Insert into MEMBER (MEM_ID,MEM_NAME,MEM_EMAIL,MEM_PWD,MEM_SEX,MEM_BIRTH,MEM_PHONE,MEM_ADS,MEM_POINT,MEM_INT,MEM_ACC_STATUS) values ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0')
-,'趙六','member4@yahoo.com.tw','member4','女',TO_DATE('1988-03-01','YYYY-MM-DD'),'0971927349','中壢市平鎮區342號',1000,10,0);
+,'趙六','twm0983527254@gmail.com','1','女',TO_DATE('1988-03-01','YYYY-MM-DD'),'0971927349','中壢市平鎮區342號',1000,10,0);
 Insert into MEMBER (MEM_ID,MEM_NAME,MEM_EMAIL,MEM_PWD,MEM_SEX,MEM_BIRTH,MEM_PHONE,MEM_ADS,MEM_POINT,MEM_INT,MEM_ACC_STATUS) values ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0')
 ,'周七','member5@yahoo.com.tw','member5','男',TO_DATE('1922-09-03','YYYY-MM-DD'),'0958237495','台北市信義區366號',2000,100,0);
 Insert into MEMBER (MEM_ID,MEM_NAME,MEM_EMAIL,MEM_PWD,MEM_SEX,MEM_BIRTH,MEM_PHONE,MEM_ADS,MEM_POINT,MEM_INT,MEM_ACC_STATUS) values ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0')
@@ -577,7 +577,8 @@ ANN_ID  varchar2(15)  NOT NULL,
 ANN_TITLE VARCHAR2(100) ,
 ANN_DES VARCHAR2(1000) ,
 ANN_DATE DATE ,
-ANN_IMG BLOB 
+ANN_IMG BLOB ,
+ANN_STATUS number(10)
 );
 
 CREATE SEQUENCE  announcement_seq
@@ -587,11 +588,11 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '雪鹽檸夏‧激涼消暑新上市！', '天氣熱想要快速消暑解渴嗎？快來杯雪鹽檸夏，清爽解膩，帶你體驗海邊激涼快感！嚴選在地台灣檸檬汁，搭配嘉義純淨日曬鹽，佐上屏東黃檸檬手工切片，體驗 多層次的風味，彷彿身處於海邊享受涼快感，內涵維他命 C讓你自動開啟美顏功能唷 。', to_date('2018-06-08 13:23:44','yyyy-mm-dd hh24:mi:ss'));
-Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '戳戳紅柚果茶系列‧新鮮Juicy登場', '戳戳紅柚果茶系列嚴選以色列紅寶石柚果汁，加入整杯葡萄柚果片，含有維生素Ｃ、膳食纖維、果酸...等，清爽不膩口，健康又美味 ，搭配台灣包種茶，戳一戳、攪一攪，戳出滿滿的鮮果好滋味！', to_date('2018-06-01 13:23:44','yyyy-mm-dd hh24:mi:ss'));
-Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '椪柑鮮橙果茶‧新鮮限量上市', 'CoCo推出「限量」新品，採用台灣台中的椪柑汁，放入整顆柳橙切片，搭配台灣包種茶，味道簡單而有層次，果香與酸甜融合的恰到好處，用最單純的原味食材，保留最純粹的鮮果滋味。數量有限賣完為止喔！', to_date('2018-04-02 13:23:44','yyyy-mm-dd hh24:mi:ss'));
-Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '星空輕檸x啡橙勿擾 夢幻上市', '天氣熱想要快速消暑解渴嗎？快來杯雪鹽檸夏，清爽解膩，帶你體驗海邊激涼快感！', to_date('2018-03-26 13:23:44','yyyy-mm-dd hh24:mi:ss'));
-Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '紅豆之戀', '使用來自喜馬拉雅山的赤豆品種，在澳洲種植採收。經高壓煮製、蜜糖封裝，精心調配3:2的豆泥口感，融合在飲品之中。每一口都感受得到紅豆的鬆軟甜香。', to_date('2018-03-20 13:23:44','yyyy-mm-dd hh24:mi:ss'));
+Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE,ANN_STATUS) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '雪鹽檸夏‧激涼消暑新上市！', '天氣熱想要快速消暑解渴嗎？快來杯雪鹽檸夏，清爽解膩，帶你體驗海邊激涼快感！嚴選在地台灣檸檬汁，搭配嘉義純淨日曬鹽，佐上屏東黃檸檬手工切片，體驗 多層次的風味，彷彿身處於海邊享受涼快感，內涵維他命 C讓你自動開啟美顏功能唷 。', to_date('2018-03-20 13:23:44','yyyy-mm-dd hh24:mi:ss'), 1);
+Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE,ANN_STATUS) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '戳戳紅柚果茶系列‧新鮮Juicy登場', '戳戳紅柚果茶系列嚴選以色列紅寶石柚果汁，加入整杯葡萄柚果片，含有維生素Ｃ、膳食纖維、果酸...等，清爽不膩口，健康又美味 ，搭配台灣包種茶，戳一戳、攪一攪，戳出滿滿的鮮果好滋味！', to_date('2018-03-26 13:23:44','yyyy-mm-dd hh24:mi:ss'), 1);
+Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE,ANN_STATUS) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '椪柑鮮橙果茶‧新鮮限量上市', 'CoCo推出「限量」新品，採用台灣台中的椪柑汁，放入整顆柳橙切片，搭配台灣包種茶，味道簡單而有層次，果香與酸甜融合的恰到好處，用最單純的原味食材，保留最純粹的鮮果滋味。數量有限賣完為止喔！', to_date('2018-04-02 13:23:44','yyyy-mm-dd hh24:mi:ss'), 1);
+Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE,ANN_STATUS) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '星空輕檸x啡橙勿擾 夢幻上市', '天氣熱想要快速消暑解渴嗎？快來杯雪鹽檸夏，清爽解膩，帶你體驗海邊激涼快感！', to_date('2018-06-01 13:23:44','yyyy-mm-dd hh24:mi:ss'), 0);
+Insert into ANNOUNCEMENT(ANN_ID,ANN_TITLE,ANN_DES,ANN_DATE,ANN_STATUS) values ('AI'||LPAD(to_char(announcement_seq.NEXTVAL), 6, '0'), '紅豆之戀', '使用來自喜馬拉雅山的赤豆品種，在澳洲種植採收。經高壓煮製、蜜糖封裝，精心調配3:2的豆泥口感，融合在飲品之中。每一口都感受得到紅豆的鬆軟甜香。', to_date('2018-06-08 13:23:44','yyyy-mm-dd hh24:mi:ss'), 0);
 
 
 

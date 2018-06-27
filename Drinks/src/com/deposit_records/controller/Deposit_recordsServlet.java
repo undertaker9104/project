@@ -1,6 +1,7 @@
 package com.deposit_records.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 
 import com.deposit_records.model.Deposit_recordsService;
 import com.deposit_records.model.Deposit_recordsVO;
@@ -37,93 +40,106 @@ public class Deposit_recordsServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
 		response.setContentType("text/html;charset=utf-8");
-		/*************************** Àx­ÈÂI¼Æ ****************************************/
+		/*************************** ï¿½xï¿½ï¿½ï¿½Iï¿½ï¿½ ****************************************/
+
 
 		if ("stored".equals(action)) {
+			PrintWriter out = response.getWriter();
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			HttpSession session = request.getSession();
 			MemberVO memVO1 = (MemberVO) session.getAttribute("memVO");
+			Boolean isDone=true;
+			
 
 			try {
 				String amount = request.getParameter("amount");
 				if (amount == null || (amount.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J±z­nÀx­ÈªºÂI¼Æ");
+					errorMsgs.add("è«‹è¼¸å…¥æ‚¨è¦å„²å€¼çš„é»æ•¸");
 				}
 				try {
 					new Integer(amount);
 				} catch (Exception e) {
-					errorMsgs.add("Àx­Èª÷ÃB¥u¯à·L¼Æ¦r");
+					errorMsgs.add("å„²å€¼é‡‘é¡åªèƒ½å¾®æ•¸å­—");
 				}
 				String cardNumber = request.getParameter("cardNumber");
 				if (cardNumber == null || (cardNumber.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J±zªº«H¥Î¥d¥d¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥æ‚¨çš„ä¿¡ç”¨å¡å¡è™Ÿ");
 				}
 			    try {
 					new Integer(cardNumber);
 				} catch (Exception e) {
-					errorMsgs.add("«H¥Î¥d¥d¸¹¥u¯à¼Æ¦r");
+					errorMsgs.add("ä¿¡ç”¨å¡å¡è™Ÿåªèƒ½æ•¸å­—");
 				}
 				String cardPassword = request.getParameter("cardPassword");
 				if (cardPassword == null || (cardPassword.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J±zªº«H¥Î¥d±K½X");
+					errorMsgs.add("è«‹è¼¸å…¥æ‚¨çš„ä¿¡ç”¨å¡å¯†ç¢¼");
 				}
 				try {
 					new Integer(cardPassword);
 				} catch (Exception e) {
-					errorMsgs.add("«H¥Î¥d±K½X¥u¯à¼Æ¦r");
+					errorMsgs.add("ä¿¡ç”¨å¡å¯†ç¢¼åªèƒ½æ•¸å­—");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/storedPoint.jsp");
-					failureView.forward(request, response);
+					JSONObject obj = new JSONObject();
+					isDone = false;
+					try{
+						obj.put("errorMsgs",errorMsgs);
+						obj.put("isDone",isDone);
+					}catch(Exception e){}
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					out.print(obj);
+					out.flush();
+					out.close();
+					//RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/storedPoint.jsp");
+					//failureView.forward(request, response);
 					return;
 				}
 
 				String mem_id = memVO1.getMem_id();
-//				String mem_id = request.getParameter("mem_id");
-//				System.out.println(amount);
-//				System.out.println(cardNumber);
-//				System.out.println(cardPassword);
-//				System.out.println(mem_id);
 				java.util.Date now = new java.util.Date();
 				java.sql.Date dep_suss_date = new java.sql.Date(now.getTime());
 				Integer dep_cash = new Integer(amount);
 				
-				//¶R 1000°e50
+				//è²· 1000é€50
 	
 				Deposit_recordsService deposit_recordSvc = new Deposit_recordsService();
 				deposit_recordSvc.addRecords(mem_id, dep_cash, dep_suss_date);
 				MemberService memberSvc = new MemberService();
 
 				MemberVO memVO = memberSvc.getOneMem_id(mem_id);
-				//¶R1000°e50
+				//è²·1000é€50
 				Integer mem_point = memVO.getMem_point() + dep_cash+(dep_cash/1000)*50;
 				memberSvc.updateMem_Point(mem_id, mem_point);
 				memVO.setMem_point(mem_point);
-				session.setAttribute("memVO", memVO);
 				
-				RequestDispatcher successView = request.getRequestDispatcher("/front-end/mem/stored_success.jsp");
-				successView.forward(request, response);
+				session.setAttribute("memVO", memVO);
+				JSONObject obj = new JSONObject();
+				obj.put("point", memVO.getMem_point());
+				out.print(obj);
+				//RequestDispatcher successView = request.getRequestDispatcher("/front-end/mem/stored_success.jsp");
+				//successView.forward(request, response);
 
 			} catch (Exception e) {
-				errorMsgs.add("Àx­È¥¢±Ñ ½Ğ­«·sÀx­È");
+				errorMsgs.add("å„²å€¼å¤±æ•— è«‹é‡æ–°å„²å€¼");
 				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/storedPoint.jsp");
 				failureView.forward(request, response);
 			}
 
 		}
 
-		/*************************** Àx­È¬ö¿ı ****************************************/
+		/*************************** ï¿½xï¿½È¬ï¿½ï¿½ï¿½ ****************************************/
 		if ("Record_value".equals(action)) {
 			try {
 				String mem_id = request.getParameter("mem_id");
 				Deposit_recordsService deposit_recordsSvc = new Deposit_recordsService();
 				List<Deposit_recordsVO> deposit_records_valuelist = deposit_recordsSvc.getOneRecords_MemIdList(mem_id);
 				request.getSession().setAttribute("deposit_records_valuelist", deposit_records_valuelist);
-				RequestDispatcher successView = request.getRequestDispatcher("/front-end/mem/listOneMemRecord_value.jsp"); // ¦¨¥\Âà¥ælistOneEmp.jsp
+				RequestDispatcher successView = request.getRequestDispatcher("/front-end/mem/listOneMemRecord_value.jsp"); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½listOneEmp.jsp
 				successView.forward(request, response);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** ï¿½ï¿½Lï¿½iï¿½àªºï¿½ï¿½ï¿½~ï¿½Bï¿½z *************************************/
 			} catch (Exception e) {
 				RequestDispatcher failureView = request.getRequestDispatcher("/front-end/index.jsp");
 				failureView.forward(request, response);
@@ -138,29 +154,29 @@ public class Deposit_recordsServlet extends HttpServlet {
 			try {
 				String mem_id = request.getParameter("mem_id");
 				if (mem_id == null || (mem_id.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J­û¤u½s¸¹");
+					errorMsgs.add("ï¿½Ğ¿ï¿½Jï¿½ï¿½ï¿½uï¿½sï¿½ï¿½");
 				}
 			
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/select_point.jsp");
 					failureView.forward(request, response);
-					return;// µ{¦¡¤¤Â_
+					return;// ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½_
 				}
 				Deposit_recordsService deposit_recordsSvc = new Deposit_recordsService();
 				List<Deposit_recordsVO> deposit_recordsVOList = deposit_recordsSvc.getOneRecords_MemIdList(mem_id);
 				if (deposit_recordsVOList.size()==0) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("ï¿½dï¿½Lï¿½ï¿½ï¿½");
 				}
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = request.getRequestDispatcher("/back-end/select_point.jsp");
 					failureView.forward(request, response);
-					return;// µ{¦¡¤¤Â_
+					return;// ï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½_
 				}		
 				request.getSession().setAttribute("deposit_recordsVOList", deposit_recordsVOList);
-				RequestDispatcher successView = request.getRequestDispatcher("/back-end/mem/listOneMemRecord_value.jsp"); // ¦¨¥\Âà¥ælistOneEmp.jsp
+				RequestDispatcher successView = request.getRequestDispatcher("/back-end/mem/listOneMemRecord_value.jsp"); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½listOneEmp.jsp
 				successView.forward(request, response);
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ï¿½Lï¿½kï¿½ï¿½ï¿½oï¿½ï¿½ï¿½:" + e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/back-end/select_point.jsp");
 				failureView.forward(request, response);
 			}

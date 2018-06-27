@@ -9,6 +9,17 @@ public class Manager_accountVO {
 	private String emp_name;
 	private byte[] emp_img;
 	private String emp_email;
+	
+	//
+	private String imgbase64;
+	public String getImgbase64() {
+		return imgbase64;
+	}
+	
+	public void setImgbase64(String imgbase64) {
+		this.imgbase64 = imgbase64;
+	}
+
 
 	public String getMan_acc_id() {
 		return man_acc_id;

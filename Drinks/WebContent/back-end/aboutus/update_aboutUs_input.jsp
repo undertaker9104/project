@@ -8,12 +8,13 @@
 <html>
 <head>
 <title>關於我們修改 </title></head>
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/bootstrap.min.css">
+</head>
 <body>
 	<br><br>
 	<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-4">
+				<div class="container col-md-8 col-md-offset-2">
 					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/aboutUs.do" name="form1">
 						<div class="form-group">
 							<td>關於我們編號:<font color=red><b>*</b></font></td>${aboutUsVO.about_id}

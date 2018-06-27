@@ -14,6 +14,8 @@ Manager_accountVO manager_accountVO = (Manager_accountVO) request.getAttribute("
 
 <style>
   table#table-1 {
+	background-color: #CCCCFF;
+    border: 2px solid black;
     text-align: center;
   }
   table#table-1 h4 {
@@ -35,6 +37,7 @@ Manager_accountVO manager_accountVO = (Manager_accountVO) request.getAttribute("
 	margin-bottom: 1px;
   }
   table, th, td {
+    border: 0px solid #CCCCFF;
   }
   th, td {
     padding: 1px;

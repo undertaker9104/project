@@ -51,6 +51,8 @@ img {
 				<tbody>
 					<c:forEach items="${unload}" var="unload">
 							<tr>
+							 <jsp:useBean id="productClsrc" scope="page" class="com.productclass.model.ProductClassService" />
+							    <td>${ productClsrc.getOne(unload.product_cl_id).product_cl_name }</td>
 								<td>${ unload.product_name }</td>
 								<td><img src="data:image/jpg;base64,${unload.getBase64Image()}">
 								<td><c:if test="${unload.product_status==0}">           

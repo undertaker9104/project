@@ -35,7 +35,7 @@ border-radius: 5px; }
 		<table style="margin-top: 40px"; width="1088" height="603"  align="center"
 			cellpadding="2" cellspacing="2">
 			<tr>
-				<td height="100" colspan="5" align="center" valign="middle"><h2>修改會員資料</h2></td>
+				 <td height="141" colspan="5" align="center" valign="middle"><img src="<%=request.getContextPath()%>/front-end/pic/333.png" style="width: 30px; height: 30px"><font style="font-family:微軟正黑體;font-weight:bold;font-size:2em">修改會員資料</font>
 			</tr>
 			<tr>
 				<td colspan="5" align="center"><c:if
@@ -51,42 +51,42 @@ border-radius: 5px; }
 					name="mem_pic" accept="image/*" onchange="loadFile(event)"
 					value="${param.mem_pic}" /> <img id="output" src="<% out.print("data:image/png;base64, "+ new String(Base64.getEncoder().encode(memVO.getMem_pic())));%>"/></td>
 				
-				<td width="188" height="70" align="center" valign="middle">會員名稱
-					:</td>
+				<td width="188" height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">會員名稱
+					:</font></td>
 				<td width="466" align="left"><%=memVO.getMem_name()%></td>
 			</tr>
 			<tr>
-				<td height="70" align="center" valign="middle"><p>EMAIL :</p></td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">EMAIL :</font></td>
 				<td align="left"><%=memVO.getMem_email()%></td>
 			</tr>
 			<tr>
-				<td height="70" align="center" valign="middle"><p>性別 :</p></td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">性別 :</font></td>
 				<td align="left"><%=memVO.getMem_sex()%></td>
 			</tr>
 			<tr>
-				<td height="70" align="center" valign="middle">密碼 :</td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">密碼 :</font></td>
 				<td align="left"><input name="password" type="text" value="<%=memVO.getMem_pwd()%>"
 					id="password" size="65" /></td>
 			</tr>
 			<tr>
-				<td width="119" height="66" align="center" valign="middle">會員ID
+				<td width="119" height="66" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">會員ID</font>
 					:</td>
 				<td colspan="2" align="left"><%=memVO.getMem_id()%></td>
-				<td height="70" align="center" valign="middle">生日 :</td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">生日 :</font></td>
 				<td align="left"><%=memVO.getMem_birth()%></td>
 			</tr>
 			<tr>
-				<td height="70" align="center" valign="middle">剩餘點數 :</td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">剩餘點數 :</font></td>
 				<td width="201" height="70" align="left"><%=memVO.getMem_point()%></td>
 				<td width="68" height="70"><a href="storedPoint.jsp"><input type="button" value="儲值點數" /></a></td>
-				<td height="70" align="center" valign="middle">手機號碼 :</td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">手機號碼 :</font></td>
 				<td height="70" align="left"><input name="phone" type="phone"
 					id="phone" size="65" value="<%=memVO.getMem_phone()%>"/></td>
 			</tr>
 			<tr>
-				<td height="70" align="center" valign="middle">累積積分 :</td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">累積積分 :</font></td>
 				<td height="70" colspan="2" align="left"><%=memVO.getMem_int()%></td>
-				<td height="70" align="center" valign="middle">地址 :</td>
+				<td height="70" align="center" valign="middle"><font style="font-family:微軟正黑體;font-weight:bold;">地址 :</font></td>
 				<td height="70" align="left"><input name="address" type="text"
 					id="address" size="65" value="<%=memVO.getMem_ads()%>"/></td>
 			</tr>
@@ -100,5 +100,68 @@ border-radius: 5px; }
 		</table>
 	</form>
 		<jsp:include page="/front-end/footer.jsp"/>
+		
+<!-- 			<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script> -->
+<!-- 	<script> 
+	
+// $("#button3").on('click',function(){
+// 	var phoneReg =  new RegExp("^09[0-9]{8}$");
+// 	var password = $("#password").val();
+// 	var phone =$("#phone").val();
+// 	var address=$("#address").val();
+// 	if(password.trim()==''){
+// 		$('#password').focus();
+// 		swal({
+// 			  title: '請輸入密碼!',
+// 			  animation: false,
+// 			  customClass: 'animated tada'
+// 			});
+// 	}else if(phone.trim()==''){
+// 		$('#phone').focus();
+// 		swal({
+// 			  title: '請輸入手機號碼!',
+// 			  animation: false,
+// 			  customClass: 'animated tada'
+// 			});
+// 	}else if (!phoneReg.test(phone)){
+// 		$('#phone').focus();
+// 		swal({
+// 			  title: '手機格式輸入錯誤!',
+// 			  animation: false,
+// 			  customClass: 'animated tada'
+// 			});
+// 	}else if(address.trim()==''){
+// 		$('#address').focus();
+// 		swal({
+// 			  title: '地址不可為空!',
+// 			  animation: false,
+// 			  customClass: 'animated tada'
+// 			});
+// 	}else{
+// 			  $.ajax({
+<%-- 				  url: "<%=request.getContextPath()%>/MemberServlet", --%>
+// 				  data: {
+// 					  "action":"Modify",
+// 				  	  "phone": phone,
+// 				  	  "password":password,
+// 				  	  "address":address,
+// 				  },
+// 				  dataType: "json",
+// 				  cache:false,
+// 				  type:"post",
+				  
+// 				  success:function(data){
+
+				
+// 				  },
+// 				  error:function(response,textStatus,errorThrown){
+// 					  debugger;
+// 					  console.log(textStatus);
+// 				  }
+// 			  })
+// 			}
+		
+// 		})
+</script> -->
 </body>
 </html>

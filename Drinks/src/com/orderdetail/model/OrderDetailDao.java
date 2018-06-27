@@ -3,8 +3,6 @@ package com.orderdetail.model;
 import java.sql.Connection;
 
 
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -113,7 +111,7 @@ public class OrderDetailDao implements OrderDetailDao_interface {
 			if (con != null) {
 				try {
 					System.err.print("Transaction is being ");
-					System.err.println("rolled back-由-OrderMaster");
+					System.err.println("rolled back-�-OrderMaster");
 					con.rollback();
 				} catch (SQLException excep) {
 					throw new RuntimeException("rollback error occured. "

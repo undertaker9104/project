@@ -18,7 +18,7 @@ body, td, th, input {
 }
 </style>
 </head>
-<body>
+<body onload="connect();" onunload="disconnect();">
 	<div class="container">
 		<div class="row">
 			<jsp:include page="/back-end/toolBar.jsp" />
@@ -34,6 +34,56 @@ body, td, th, input {
 			</div>
 		</div>
 	</div>
+	 <h3 id="statusOutput" class="statusOutput"></h3>
 	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="<%=request.getContextPath() %>/front-end/js/sweetalert2.all.js"></script>
+	
+<script>
+var MyPoint = "/MyEchoServer";
+var host = window.location.host;
+var path = window.location.pathname;
+var webCtx = path.substring(0, path.indexOf('/', 1));
+var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+var statusOutput = document.getElementById("statusOutput");
+var webSocket;
+
+function connect() {
+	// 建立 websocket 物件
+	webSocket = new WebSocket(endPointURL);
+	
+	webSocket.onopen = function(event) {
+	
+	};
+
+	webSocket.onmessage = function(event) {
+		var jsonObj = JSON.parse(event.data);
+	     var message = jsonObj.userName ;
+		swal({	
+			  imageUrl: "/CA101G2/front-end/pic/123.png",
+			  title: "有一則新的 <small>點數提取</small>!",
+			  showCancelButton: true,
+			  confirmButtonText:"立即處理",
+			  text: "來自於:會員"+message, 
+			}).then(function (result) {
+                window.location.href = "<%=request.getContextPath()%>/back-end/mem/listAllModerated.jsp";
+            });
+		
+	};
+
+	webSocket.onclose = function(event) {
+		updateStatus("WebSocket 已離線");
+	};
+}
+
+function sendMessage() {
+
+}
+
+function disconnect () {
+	webSocket.close();
+}
+
+</script>
+	
 </body>
 </html>

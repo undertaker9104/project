@@ -103,22 +103,22 @@ public class AboutUsServlet extends HttpServlet {
 				String about_id = new String(req.getParameter("about_id").trim());
 				String about_des = req.getParameter("about_des").trim();
 				if (about_des == null || about_des.trim().length() == 0) {
-					errorMsgs.add("請勿空白");
+					errorMsgs.add("敘述請勿空白");
 				}
 				
 				String about_time = req.getParameter("about_time").trim();
 				if (about_time == null || about_time.trim().length() == 0) {
-					errorMsgs.add("請勿空白");
+					errorMsgs.add("營業時間請勿空白");
 				}
 				
 				String about_phone = req.getParameter("about_phone").trim();
 				if (about_phone == null || about_phone.trim().length() == 0) {
-					errorMsgs.add("請勿空白");
+					errorMsgs.add("電話請勿空白");
 				}
 				
 				String about_add = req.getParameter("about_add").trim();
 				if (about_add == null || about_add.trim().length() == 0) {
-					errorMsgs.add("請勿空白");
+					errorMsgs.add("地址請勿空白");
 				}
 				
 				AboutUsVO aboutUsVO = new AboutUsVO();

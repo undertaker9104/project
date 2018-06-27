@@ -3,7 +3,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.int_exc.model.*"%>
 
-<%Int_excVO int_excVO = (Int_excVO) request.getAttribute("int_excVO");%>
 <%
     Int_excService int_excSvc = new Int_excService();
 	List<Int_excVO> list = int_excSvc.getAll();

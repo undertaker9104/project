@@ -18,7 +18,7 @@ public class SweetDao implements SweetDao_interface {
 
 	private static final String INSERT_PSMT = "INSERT INTO SWEET(sweet_id,sweet_des) VALUES('S'||LPAD(to_char(sweet_seq.NEXTVAL), 6, '0'),?)";
 	private static final String FIND_BY_PK = "SELECT * FROM SWEET WHERE sweet_id = ?";
-	private static final String GET_ALL = "SELECT * FROM  SWEET ORDER BY sweet_id";
+	private static final String GET_ALL = "SELECT * FROM  SWEET ORDER BY sweet_id desc";
 	private static final String UPDATE_STMT = "UPDATE SWEET SET sweet_des = ? WHERE sweet_id = ?";
 	
 

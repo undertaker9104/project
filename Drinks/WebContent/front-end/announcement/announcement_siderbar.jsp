@@ -5,7 +5,7 @@
 <%@ page import="com.announcement.model.*"%>
 <%
 	AnnouncementService announcementSvc2 = new AnnouncementService();
-	List<AnnouncementVO> list2 = announcementSvc2.getAll();
+	List<AnnouncementVO> list2 = announcementSvc2.getAllAd();
 	pageContext.setAttribute("list2", list2);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -48,19 +48,17 @@ body{font:12px/180% Arial, Helvetica, sans-serif;}
 
 	<div class="container-fluid">
 		<div class="row">
-
 				<div class="list-group advbox${announcementVO.ann_id}">
 					<div class="thumbnail advpic${announcementVO.ann_id}">
 						<c:if test="${empty announcementVO.ann_img}">
-							<img src="<%=request.getContextPath()%>/img/test.jpg">
+							<img src="<%=request.getContextPath()%>/front-end/img/null.png">
 						</c:if> 
 						<c:if test="${! empty announcementVO.ann_img}">
-							<img src="data:image/png;base64,${announcementVO.getImg(announcementVO.ann_img)}"  width="70%" height="70%"/>
+							<img src="data:image/png;base64,${announcementVO.getBase64Image()}"  width="70%" height="70%"/>
 						</c:if>
 						<a href="javascript:void(0);" class="closebtn${announcementVO.ann_id}">關閉</a>
 						<div class="caption text-center">
 							<h2>${announcementVO.ann_title}</h2>
-							<p>內文</p>
 							<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/announcementFront.do">
 								<input type="submit" value="詳情" class="btn btn-danger" >
 								<input type="hidden" name="ann_id" value="${announcementVO.ann_id}">
@@ -68,9 +66,7 @@ body{font:12px/180% Arial, Helvetica, sans-serif;}
 							</FORM>
 						</div>
 					</div>	
-				</div>
-
-				
+				</div>	
 		</div>
 	</div>
 </c:forEach> 	

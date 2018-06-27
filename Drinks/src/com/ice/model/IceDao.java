@@ -14,7 +14,7 @@ public class IceDao implements IceDao_interface {
 
 	private static final String INSERT_PSMT = "INSERT INTO ICE(ice_id,ice_des) VALUES('I'||LPAD(to_char(product_seq.NEXTVAL), 6, '0'),?)";
 	private static final String FIND_BY_PK = "SELECT * FROM ICE WHERE ice_id = ?";
-	private static final String GET_ALL = "SELECT * FROM  ICE ORDER BY ice_id";
+	private static final String GET_ALL = "SELECT * FROM  ICE ORDER BY ice_id desc";
 	private static final String UPDATE_STMT = "UPDATE ICE SET ice_des = ? WHERE ice_id = ?";	
 
 	private static DataSource ds = null;

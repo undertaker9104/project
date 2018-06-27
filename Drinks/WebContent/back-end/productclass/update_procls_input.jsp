@@ -37,24 +37,7 @@ img {
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-md-4 control-label">類別狀態</label>
-					<div class="col-md-4 inputGroupContainer">
-						<div class="input-group">
-							<span class="input-group-addon"> 
-							<i class="glyphicon glyphicon-comment"></i>
-							</span>
-							<select size="1" name="productClass_Status" class="form-control">
-								<option value="0" ${(proclsVO.product_cl_status ==0 ) ? 'selected':''}>
-									下架
-								</option>
-								<option value="1" ${(proVO.product_cl_status ==1 ) ? 'selected':''}>
-									上架
-								</option>
-							</select>
-						</div>
-					</div>
-				</div>
+				
 				<div class="form-group">
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-4">

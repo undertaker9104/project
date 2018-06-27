@@ -1,7 +1,7 @@
 package com.orderdetail.model;
 
 import java.util.List;
-
+import java.sql.Connection;
 import com.group_order_detail.model.Group_order_detailVO;
 
 public class OrderDetailService {
@@ -22,6 +22,15 @@ public class OrderDetailService {
 	public List<OrderDetailVo> getOne(String ord_id) {
 		return dao.findByOrderId(ord_id);
 	}
+	
+	public void addWithOrderMaster(OrderDetailVo orderItem, Connection con){
+		dao.addWithOrderMaster(orderItem, con);
+	}
+			
+	public List<OrderDetailVo> findByOrderId(String ord_id){
+		return dao.findByOrderId(ord_id);
+	}
+
 
 	
 

@@ -25,6 +25,7 @@ public class ProductDao implements ProductDao_interface {
 	private static final String RANK ="select product_id ,sum(tol_cup) from order_detail group by product_id   order by   sum(tol_cup) desc" ;
 	private static final String UPDATE_UPLOAD_STMT = "UPDATE PRODUCT SET product_status=? WHERE product_id = ?";
 	private static final String GET_UNLOAD = "SELECT * FROM  PRODUCT where product_status=0 ORDER BY product_id desc";
+	private static final String UPDATE_DOWN_STMT = "UPDATE PRODUCT SET product_status=? WHERE product_id = ?";
 	private static DataSource ds = null;
 	static {
 		try {
@@ -474,6 +475,39 @@ public class ProductDao implements ProductDao_interface {
 				}
 			}
 		}
+		
+	}
+
+	@Override
+	public void down(ProductVo productVo) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+
+		try {
+			con = ds.getConnection();
+			psmt = con.prepareStatement(UPDATE_DOWN_STMT);
+			psmt.setInt(1, productVo.getProduct_status());
+			psmt.setString(2, productVo.getProduct_id());
+			psmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (psmt != null) {
+				try {
+					psmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 		
 	}
 

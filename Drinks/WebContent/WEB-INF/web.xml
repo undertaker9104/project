@@ -4,6 +4,10 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+   <context-param>
+		<param-name>contentType</param-name>
+		<param-value>text/html; charset=UTF-8</param-value>
+  </context-param>
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/CA101G2</res-ref-name>
@@ -109,45 +113,6 @@
     <url-pattern>/front-end/group_order_detail.do</url-pattern>
   </servlet-mapping>
   
-  <filter>
-    <filter-name>LoginFilter</filter-name>
-    <filter-class>com.filter.LoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>LoginFilter</filter-name>
-    <url-pattern>/front-end/mem/modify.jsp</url-pattern>
-    <url-pattern>/front-end/mem/storedPoint.jsp</url-pattern>
-    <url-pattern>/front-end/mem/withdrawalPoint.jsp</url-pattern>
-    <url-pattern>/front-end/mem/qrcode.jsp</url-pattern>
-    <url-pattern>/front-end/groupart/grouplist.jsp</url-pattern>
-    <url-pattern>/front-end/groupart/MyGroupList.jsp</url-pattern>
-    <url-pattern>/front-end/groupart/MyTrackList.jsp</url-pattern>
-    <url-pattern>/front-end/groupart/MyAddGroupList.jsp</url-pattern>
-    <url-pattern>/front-end/groupart/addGroupListForm.jsp</url-pattern>
-    <url-pattern>/front-end/ordermaster/listMyOrderMaster.jsp</url-pattern>
-    <url-pattern>/front-end/producttract/listMyFaver.jsp</url-pattern>
-    <url-pattern>/front-end/shoppingcart/shoppingcart.jsp</url-pattern>
-     <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-    <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>ERROR</dispatcher>
-    <dispatcher>ASYNC</dispatcher>
-  </filter-mapping>
-  
-  <filter>
-    <filter-name>LoginFilter2</filter-name>
-    <filter-class>com.filter.LoginFilter2</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>LoginFilter2</filter-name>
-    <url-pattern>/back-end/ordermaster/listAllOrderMasterByShip.jsp</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-    <dispatcher>INCLUDE</dispatcher>
-    <dispatcher>ERROR</dispatcher>
-    <dispatcher>ASYNC</dispatcher>
-  </filter-mapping>
-  
    <servlet>
     <servlet-name>DiscountServlet</servlet-name>
     <servlet-class>com.discount.controller.DiscountServlet</servlet-class>
@@ -192,10 +157,122 @@
     <servlet-name>AnnouncementServletFront</servlet-name>
     <url-pattern>/front-end/announcementFront.do</url-pattern>
   </servlet-mapping>
-    
+  
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/front-end/mem/modify.jsp</url-pattern>
+    <url-pattern>/front-end/mem/storedPoint.jsp</url-pattern>
+    <url-pattern>/front-end/mem/withdrawalPoint.jsp</url-pattern>
+    <url-pattern>/front-end/mem/qrcode.jsp</url-pattern>
+    <url-pattern>/front-end/groupart/grouplist.jsp</url-pattern>
+    <url-pattern>/front-end/groupart/MyGroupList.jsp</url-pattern>
+    <url-pattern>/front-end/groupart/MyTrackList.jsp</url-pattern>
+    <url-pattern>/front-end/groupart/MyAddGroupList.jsp</url-pattern>
+    <url-pattern>/front-end/groupart/addGroupListForm.jsp</url-pattern>
+    <url-pattern>/front-end/ordermaster/listMyOrderMaster.jsp</url-pattern>
+    <url-pattern>/front-end/producttract/listMyFaver.jsp</url-pattern>
+    <url-pattern>/front-end/shoppingcart/shoppingcart.jsp</url-pattern>
+     <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+  
+  <filter>
+    <filter-name>LoginFilter2</filter-name>
+    <filter-class>com.filter.LoginFilter2</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter2</filter-name>
+    <url-pattern>/back-end/ordermaster/listAllOrderMasterByShip.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+     
   <context-param>
     <param-name>org.apache.tomcat.websocket.textBufferSize</param-name>
     <param-value>307200</param-value>
   </context-param>
+  
+    <servlet>
+	<servlet-name>ProductServlet_Android</servlet-name>
+	<servlet-class>com.product.controller.ProductServlet_Android</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>ProductServlet_Android</servlet-name>
+	<url-pattern>/ProductServlet_Android</url-pattern>
+  </servlet-mapping>
+  <servlet>
+		<servlet-name>MemberServlet_Android</servlet-name>
+		<servlet-class>com.mem.controller.MemberServlet_Android</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberServlet_Android</servlet-name>
+		<url-pattern>/MemberServlet_Android</url-pattern>
+	</servlet-mapping>
+  <servlet>
+		<servlet-name>Manager_Account_Servlet_Android</servlet-name>
+		<servlet-class>com.manager_account.controller.Manager_Account_Servlet_Android</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Manager_Account_Servlet_Android</servlet-name>
+		<url-pattern>/Manager_Account_Servlet_Android</url-pattern>
+	</servlet-mapping>
+	
+  
+  <servlet>
+		<servlet-name>OrderServlet_Android</servlet-name>
+		<servlet-class>com.ordermaster.controller.OrderServlet_Android</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderServlet_Android</servlet-name>
+		<url-pattern>/OrderServlet_Android</url-pattern>
+  </servlet-mapping>
+  
+
+  <servlet>
+		<servlet-name>Product_Class_Servlet_Android</servlet-name>
+		<servlet-class>com.productclass.controller.Product_Class_Servlet_Android</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Product_Class_Servlet_Android</servlet-name>
+		<url-pattern>/Product_Class_Servlet_Android</url-pattern>
+	</servlet-mapping>
+  
+  <servlet>
+		<servlet-name>SweetServlet_Android</servlet-name>
+		<servlet-class>com.sweet.controller.SweetServlet_Android</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SweetServlet_Android</servlet-name>
+		<url-pattern>/SweetServlet_Android</url-pattern>
+	</servlet-mapping>
+	
+  <servlet>
+		<servlet-name>IceServlet_Android</servlet-name>
+		<servlet-class>com.ice.controller.IceServlet_Android</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IceServlet_Android</servlet-name>
+		<url-pattern>/IceServlet_Android</url-pattern>
+	</servlet-mapping>
+	
+	
+	 <servlet>
+		<servlet-name>DiscountServlet_Android</servlet-name>
+		<servlet-class>com.discount.controller.DiscountServlet_Android</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DiscountServlet_Android</servlet-name>
+		<url-pattern>/DiscountServlet_Android</url-pattern>
+	</servlet-mapping>
   
   </web-app>

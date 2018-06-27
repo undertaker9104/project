@@ -2,6 +2,7 @@ package com.point_exc_cash.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import org.json.JSONObject;
 
 import com.deposit_records.model.Deposit_recordsService;
 import com.deposit_records.model.Deposit_recordsVO;
@@ -38,7 +41,9 @@ public class Point_exc_cashServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
 		response.setContentType("text/html;charset=utf-8");
+		Boolean isDone=true;
 		if ("Withdrawal".equals(action)) {
+	
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			
@@ -72,25 +77,54 @@ public class Point_exc_cashServlet extends HttpServlet {
 					errorMsgs.add("請輸入您的支付密碼");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/withdrawalPoint.jsp");
-					failureView.forward(request, response);
+					JSONObject obj = new JSONObject();
+					isDone = false;
+					try{
+						obj.put("errorMsgs",errorMsgs);
+						obj.put("isDone",isDone);
+					}catch(Exception e){}
+					
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					PrintWriter out = response.getWriter();
+					out.print(obj);
+					out.flush();
+					out.close();
+					//RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/withdrawalPoint.jsp");
+					//failureView.forward(request, response);
 					return;
 				}
-				
+	
 				MemberService memberSvc = new MemberService();
 				MemberVO memberVO=memberSvc.getOneMem_id(mem_id);
 				if(!mem_pwd.equals(memberVO.getMem_pwd())){
+					
 					errorMsgs.add("支付密碼錯誤");
 				}
 				if(memberVO.getMem_point()<new Integer(Balance)){
+					
 					errorMsgs.add("點數餘額不足");
 				}
 				
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/withdrawalPoint.jsp");
-					failureView.forward(request, response);
+					JSONObject obj = new JSONObject();
+					isDone = false;
+					try{
+						obj.put("errorMsgs",errorMsgs);
+						obj.put("isDone",isDone);
+					}catch(Exception e){}
+					
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					PrintWriter out = response.getWriter();
+					out.print(obj);
+					out.flush();
+					out.close();
+					//RequestDispatcher failureView = request.getRequestDispatcher("/front-end/mem/withdrawalPoint.jsp");
+					//failureView.forward(request, response);
 					return;
 				}
+	
 				
 				java.util.Date now = new java.util.Date();
 				java.sql.Date exc_date = new java.sql.Date(now.getTime());
@@ -104,8 +138,11 @@ public class Point_exc_cashServlet extends HttpServlet {
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("point_exc_cashlist", point_exc_cashlist);
-				RequestDispatcher successView = request.getRequestDispatcher("/front-end/mem/withdrawalPoint_success.jsp");
-				successView.forward(request, response);
+				JSONObject obj = new JSONObject();
+				PrintWriter out = response.getWriter();
+				out.print(obj);
+				//RequestDispatcher successView = request.getRequestDispatcher("/front-end/mem/withdrawalPoint_success.jsp");
+				//successView.forward(request, response);
 				
 				
 				

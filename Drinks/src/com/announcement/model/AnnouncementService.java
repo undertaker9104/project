@@ -12,7 +12,7 @@ public class AnnouncementService {
 		dao = new AnnouncementDAO();
 	}
 
-	public AnnouncementVO addAnnouncement(String ann_title, String ann_des, Date ann_date, byte[] ann_img) {
+	public AnnouncementVO addAnnouncement(String ann_title, String ann_des, Date ann_date, byte[] ann_img, Integer ann_status) {
 
 		AnnouncementVO announcementVO = new AnnouncementVO();
 
@@ -20,11 +20,12 @@ public class AnnouncementService {
 		announcementVO.setAnn_des(ann_des);
 		announcementVO.setAnn_date(ann_date);
 		announcementVO.setAnn_img(ann_img);
+		announcementVO.setAnn_status(ann_status);
 		dao.insert(announcementVO);
 		return announcementVO;
 	}
 
-	public AnnouncementVO updateAnnouncement(String ann_id, String ann_title, String ann_des, Date ann_date, byte[] ann_img) {
+	public AnnouncementVO updateAnnouncement(String ann_id, String ann_title, String ann_des, Date ann_date, byte[] ann_img, Integer ann_status) {
 
 		AnnouncementVO announcementVO = new AnnouncementVO();
 
@@ -33,6 +34,7 @@ public class AnnouncementService {
 		announcementVO.setAnn_des(ann_des);	
 		announcementVO.setAnn_date(ann_date);
 		announcementVO.setAnn_img(ann_img);
+		announcementVO.setAnn_status(ann_status);
 		dao.update(announcementVO);
 		return announcementVO;
 	}
@@ -47,5 +49,13 @@ public class AnnouncementService {
 
 	public List<AnnouncementVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<AnnouncementVO> getAllDesc() {
+		return dao.getAllDesc();
+	}
+	
+	public List<AnnouncementVO> getAllAd() {
+		return dao.getAllAd();
 	}
 }

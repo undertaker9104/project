@@ -43,13 +43,6 @@ body, td, th, input {
 </style>
 </head>
 <body>
-
-${amount}
-${distotal}
-${totalCup}
-${disCup}
-${disPrice}
-
 <jsp:include page="/front-end/header.jsp"/>
 	<jsp:useBean id="sweetSvc" scope="page"	class="com.sweet.model.SweetService" />
 	<jsp:useBean id="iceSvc" scope="page" class="com.ice.model.IceService" />

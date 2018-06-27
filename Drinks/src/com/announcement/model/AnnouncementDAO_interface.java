@@ -9,6 +9,8 @@ public interface AnnouncementDAO_interface {
     public void delete(String ann_id);
     public AnnouncementVO findByPrimaryKey(String ann_id);
     public List<AnnouncementVO> getAll();
+    public List<AnnouncementVO> getAllDesc();
+    public List<AnnouncementVO> getAllAd();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //  public List<EmpVO> getAll(Map<String, String[]> map); 
 }

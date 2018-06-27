@@ -19,10 +19,11 @@ public class ProductClassDao implements ProductClassDao_interface {
 	private static final String INSERT_PSMT = "INSERT INTO PRODUCT_ClASS(PRODUCT_CL_ID,PRODUCT_CL_NAME,PRODUCT_CL_STATUS) VALUES('PC'||LPAD(to_char(product_class_seq.NEXTVAL), 6, '0'),?,?)";
 	private static final String GET_ALL_FRONT = "SELECT * FROM PRODUCT_ClASS WHERE PRODUCT_CL_STATUS=1 ORDER BY PRODUCT_CL_ID ";
 	private static final String GET_ALL = "SELECT * FROM PRODUCT_ClASS where PRODUCT_CL_STATUS=1 ORDER BY PRODUCT_CL_ID  desc";
-	private static final String UPDATE_STMT = "UPDATE PRODUCT_ClASS SET PRODUCT_CL_NAME = ? ,PRODUCT_CL_STATUS = ?  WHERE PRODUCT_CL_ID = ?";
+	private static final String UPDATE_STMT = "UPDATE PRODUCT_ClASS SET PRODUCT_CL_NAME = ?  WHERE PRODUCT_CL_ID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM PRODUCT_ClASS WHERE PRODUCT_CL_ID = ?";
 	private static final String UPDATE_UPLOAD_STMT = "UPDATE PRODUCT_ClASS SET PRODUCT_CL_STATUS=? WHERE PRODUCT_CL_ID = ?";
 	private static final String GET_UNLOAD = "SELECT * FROM  PRODUCT_ClASS where PRODUCT_CL_STATUS=0 ORDER BY PRODUCT_CL_ID desc";
+	private static final String DOWN_STMT = "UPDATE PRODUCT_ClASS SET PRODUCT_CL_STATUS=?  WHERE PRODUCT_CL_ID = ?";
 	private static DataSource ds = null;
 	static {
 		try {
@@ -116,7 +117,6 @@ public class ProductClassDao implements ProductClassDao_interface {
 			con = ds.getConnection();
 			psmt = con.prepareStatement(UPDATE_STMT);
 			psmt.setString(1, productClassVo.getProduct_cl_name());
-			psmt.setInt(2, productClassVo.getProduct_cl_status());
 			psmt.setString(3, productClassVo.getProduct_cl_id());
 		
 			psmt.executeUpdate();
@@ -292,6 +292,39 @@ public class ProductClassDao implements ProductClassDao_interface {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void down(ProductClassVo producclassVo) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		try {
+			con = ds.getConnection();
+			psmt = con.prepareStatement(DOWN_STMT);
+			psmt.setInt(1, producclassVo.getProduct_cl_status());
+			psmt.setString(2, producclassVo.getProduct_cl_id());
+	
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			if (psmt != null) {
+				try {
+					psmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 	}
 
 }

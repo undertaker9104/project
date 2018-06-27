@@ -11,6 +11,17 @@ public class ProductVo implements java.io.Serializable {
 	private String  product_des;
 	private byte[]  product_img;
 	private Integer  product_status;
+	
+	private String base64;
+	
+	public String getBase64() {
+		return base64;
+	}
+
+	public void setBase64(String base64) {
+		this.base64 = base64;
+	}
+
 
 
 	public ProductVo(String product_id, String product_cl_id, String product_name, Integer product_price,

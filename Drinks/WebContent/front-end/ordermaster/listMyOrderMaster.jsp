@@ -48,7 +48,7 @@ img {
 	      <div class="col-xs-12 col-sm-10 col-sm-offset-2">
 		<table 	class="table table-hover ">
 			<thead>
-				<tr bgcolor="s">
+				<tr bgcolor="white">
 					<th style="text-align: center; font-size: 24px">訂單編號</th>
 					<th style="text-align: center; font-size: 24px">揪團</th>
 					<th style="text-align: center; font-size: 24px">外送地址</th>

@@ -14,6 +14,8 @@ Point_exc_cashVO point_exc_cashVO = (Point_exc_cashVO) request.getAttribute("poi
 
 <style>
   table#table-1 {
+	background-color: #CCCCFF;
+    border: 2px solid black;
     text-align: center;
   }
   table#table-1 h4 {
@@ -38,6 +40,7 @@ Point_exc_cashVO point_exc_cashVO = (Point_exc_cashVO) request.getAttribute("poi
     table-layout:fixed;
   word-break:break-all;
   word-warp:break-word;
+    border: 0px solid #CCCCFF;
   }
   th, td {
    width:100px;
@@ -89,11 +92,11 @@ border-radius: 5px; }
 </head>
 <body bgcolor='white'>
 
-<table id="table-1" align="center">
-	<tr><td>
-		 <h3>點數兌換審核</h3>
-	</td></tr>
-</table>
+
+	<div align="center" style="
+    padding-top: 5%;
+"><img src="<%=request.getContextPath()%>/front-end/pic/444.png" style="width: 50px; height: 50px"><font style="font-family:微軟正黑體;font-weight:bold;font-size:2em">點數兌換審核	</font></td>
+</div>
 
 
 <%-- 錯誤表列 --%>
@@ -131,7 +134,7 @@ border-radius: 5px; }
 	</tr>
 	<tr>
 		<td>申請狀態:</td>
-		<td><input type="TEXT" name="req_status" size="45"	value="${point_exc_cashVO.req_status}" /></td>
+		<td><input type="TEXT" name="req_status" size="2"	value="${point_exc_cashVO.req_status}" />(0:待審核 1:已審核)</td>
 	</tr>
 	<tr>
 	<td colspan="2">

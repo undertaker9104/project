@@ -4,14 +4,26 @@
 <%@ page import="com.manager_account.model.*"%>
 <%@ page import="com.manager_account_authority.model.*"%>
 <%@ page import="com.authority_class.model.*"%>
+<%@ page import="com.manager_account.model.*"%>
 
+<jsp:useBean id="manager_account_authoritySvc"
+	class="com.manager_account_authority.model.Manager_account_authorityService" />
+<%
+Manager_accountVO manager_accountVO = (Manager_accountVO) session.getAttribute("manager_accountVO");
+System.out.print(manager_accountVO.getMan_acc_id());
+List<String> list1 = manager_account_authoritySvc.getOneManager_account_authority(manager_accountVO.getMan_acc_id());
+if(!list1.contains("AC000001")){
+	   out.println("<script language=\"javascript\">");
+	   out.println("alert(\"您尚未有管理權限\");");
+	   out.println("window.history.back(-1);");  
+	   out.println("</script>");
+}
+%>
 <%
 	Manager_accountService manager_accountSvc = new Manager_accountService();
 	List<Manager_accountVO> list = manager_accountSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
-<jsp:useBean id="manager_account_authoritySvc"
-	class="com.manager_account_authority.model.Manager_account_authorityService" />
 <jsp:useBean id="authority_classSvc"
 	class="com.authority_class.model.Authority_classService" />
 
@@ -20,20 +32,7 @@
 <title>所有員工資料</title>
 
 <style>
-table#table-1 {
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
 </style>
 
 <style>
@@ -44,7 +43,7 @@ table {
 	margin-bottom: 5px;
 }
 
-th, td {
+table, th, td {
 	border: 1px solid #CCCCFF;
 }
 
@@ -53,32 +52,38 @@ th, td {
 	text-align: center;
 }
 
-.button-secondary {
-	background: #3498db;
-	background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-	background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-	background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-	background-image: -o-linear-gradient(top, #3498db, #2980b9);
-	background-image: linear-gradient(to bottom, #3498db, #2980b9);
-	-webkit-border-radius: 28;
-	-moz-border-radius: 28;
-	border-radius: 28px;
-	font-family: Arial;
-	color: #ffffff;
-	font-size: 5px;
-	padding: 10px 20px 10px 20px;
-	text-decoration: none;
+ .button-error,.button-secondary {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 5px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
 }
 
-.button-secondary:hover {
-	background: #3cb0fd;
-	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-	text-decoration: none;
+ .button-error{
+ background: red;
+ }
+
+ .button-secondary:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }
+
+tr:nth-child(even) {background-color:#E8FFFF;}	
 </style>
 </head>
 <body bgcolor='white'>
@@ -87,22 +92,26 @@ th, td {
 			<jsp:include page="/back-end/toolBar.jsp" />
 			<jsp:include page="/back-end/breadBar.jsp" />
 			<table id="table-1">
-				
+				<tr>
+					<td>
+						<h3><font style="font-family:微軟正黑體;font-weight:bold; font-weight:1.5em; font-size:2em" >所有員工資料</font></h3>
+					</td>
+				</tr>
 			</table>
 			<%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
-				<font style="color: red">請修正以下錯誤:</font>
+				<font style="color: red ;">請修正以下錯誤:</font>
 				<ul>
 					<c:forEach var="message" items="${errorMsgs}">
 						<li style="color: red">${message}</li>
 					</c:forEach>
 				</ul>
 			</c:if>
-			<div class="page-header text-left">
-					<div class="h1">管理介面<small>所有員工資料</small></div>
-				</div>
+
 			<table>
-				<tr>
+				<tr style="
+    height: 51.979166px;
+">
 					<th>員工編號</th>
 					<th>員工姓名</th>
 					<th>員工E-mail</th>
@@ -142,6 +151,14 @@ th, td {
 								<!--送出當前是第幾頁給Controller-->
 								<input type="hidden" name="action" value="getOne_For_Display">
 							</FORM>
+							<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Manager_accountServlet" style="margin-bottom: 0px;">
+			     <input class="button-error" type="submit" value="刪除">
+			     <input type="hidden" name="man_acc_id"      value="${manager_accountVO.man_acc_id}">
+			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
+			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
+			     <input type="hidden" name="action"     value="delete"></FORM>
+			</td>
 						</td>
 					</tr>
 				</c:forEach>

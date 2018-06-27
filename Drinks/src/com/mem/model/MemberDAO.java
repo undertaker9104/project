@@ -1,6 +1,7 @@
 package com.mem.model;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,13 +28,14 @@ public class MemberDAO implements Member_interface {
 	private static final String INSERT_STMT = "INSERT INTO member (mem_id,mem_name,mem_email,mem_pwd,mem_sex,mem_birth,mem_phone,mem_ads,mem_point,mem_int,mem_acc_status,mem_pic,mem_qrcode) VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,0,0,'0',?,?)";
 	private static final String GET_ALL_STMT = "SELECT mem_id,mem_name,mem_email,mem_pwd,mem_sex,to_char(mem_birth,'yyyy-mm-dd') mem_birth,mem_phone,mem_ads,mem_point,mem_int,mem_acc_status,mem_pic FROM member order by mem_id";
 	private static final String GET_ONE_STMT = "SELECT mem_id,mem_name,mem_email,mem_pwd,mem_sex,to_char(mem_birth,'yyyy-mm-dd') mem_birth,mem_phone,mem_ads,mem_point,mem_int,mem_acc_status,mem_pic,mem_qrcode FROM member where mem_email =?";
-	private static final String GET_ONE_STMT_id = "SELECT mem_id,mem_name,mem_email,mem_pwd,mem_sex,to_char(mem_birth,'yyyy-mm-dd') mem_birth,mem_phone,mem_ads,mem_point,mem_int,mem_acc_status,mem_pic FROM member where mem_id =?";
+	private static final String GET_ONE_STMT_id = "SELECT mem_id,mem_name,mem_email,mem_pwd,mem_sex,to_char(mem_birth,'yyyy-mm-dd') mem_birth,mem_phone,mem_ads,mem_point,mem_int,mem_acc_status,mem_pic ,mem_qrcode FROM member where mem_id =?";
 	private static final String DELETE = "DELETE FROM member where mem_id = ?";
 	private static final String UPDATE = "UPDATE member set  mem_pwd=?, mem_phone=?, mem_ads=? , mem_pic=? where mem_email = ?";
 	private static final String UPDATE_Manager = "UPDATE member set  mem_point=?, mem_int=?, mem_acc_status=? , mem_pic=? where mem_id = ?";
 	private static final String UPDATE_Point = "UPDATE member set  mem_point=? where mem_id = ?";
 	private static final String GET_ONE = "SELECT  mem_id,mem_email FROM member where mem_id =?";
 	private static final String GET_IMG = "SELECT  mem_name,mem_pic,mem_point FROM member where mem_id =?";
+	private static final String FIND_BY_ID_PASWD = "SELECT * FROM member WHERE mem_email = ? AND mem_pwd = ?";
 	@Override
 	public void insert(MemberVO MemberVO) {
 		Connection con = null;
@@ -282,6 +284,7 @@ public class MemberDAO implements Member_interface {
 				MemberVO.setMem_int(rs.getInt("mem_int"));
 				MemberVO.setMem_acc_status(rs.getInt("mem_acc_status"));
 				MemberVO.setMem_pic(rs.getBytes("mem_pic"));
+				MemberVO.setMem_qrcode(rs.getBytes("mem_qrcode"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -474,5 +477,87 @@ public class MemberDAO implements Member_interface {
 			}
 			return MemberVO;
 		
+	}
+
+	@Override
+	public void update(String mem_id, Integer mem_point, Connection con) {
+		PreparedStatement pstmt = null;
+		
+
+		try {
+			con = ds.getConnection();
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(URL,USER,
+//					PASSWORD);
+			pstmt = con.prepareStatement(UPDATE_Point);
+
+			pstmt.setInt(1, mem_point);
+			pstmt.setString(2, mem_id);
+
+			pstmt.executeUpdate();
+			// Handle any driver errors
+//		} catch (ClassNotFoundException ce) {
+//			ce.printStackTrace();
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3.閮剖����xception�����atch��憛
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-�-member_update");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			
+		}
+		
+	}
+
+	@Override
+	public boolean isMember(String mem_email, String mem_pwd) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		boolean isMember = false;
+		try {
+			con = ds.getConnection();
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(URL,USER,
+//					PASSWORD);
+			ps = con.prepareStatement(FIND_BY_ID_PASWD);
+			ps.setString(1, mem_email);
+			ps.setString(2, mem_pwd);
+			ResultSet rs = ps.executeQuery();
+			isMember = rs.next();
+			return isMember;
+//		} catch (ClassNotFoundException ce) {
+//			ce.printStackTrace(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return isMember;
 	}
 }

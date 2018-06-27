@@ -15,9 +15,10 @@
 </head>
 
 <body>
- <div class="container">
+
+	<div class="container">
 		<div class="row">
-		<jsp:include page="/back-end/toolBar.jsp" />
+			<jsp:include page="/back-end/toolBar.jsp" />
 			<jsp:include page="/back-end/breadBar.jsp" />
 		 <div class="col-xs-12 col-sm-9">
 				<div class="page-header text-left">
@@ -29,10 +30,10 @@
 				<table class="table table-bordered table-hover">
 					<tr>
 						<th width="5%">ID</th>
-						<th width="40%">關於我們</th>
+						<th width="30%">關於我們</th>
 						<th width="5%">營業時間</th>
 						<th width="5%">電話</th>
-						<th width="5%">地址</th>
+						<th width="10%">地址</th>
 						<th width="1%">修改</th>
 					</tr>
 					<c:forEach var="aboutUsVO" items="${list}">

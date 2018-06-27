@@ -1,4 +1,4 @@
-v<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.mem.model.*"%>
 
@@ -50,7 +50,7 @@ border-radius: 5px;
 			</tr>
 			<tr>
 				<td height="48" align="center" valign="middle">密碼 :</td>
-				<td><input name="password" type="password" size="50" valuse="${param.password}" id="password" ></td>
+				<td><input name="password" type="password" size="50" valuse="${param.password}" id="password"  /></td>
 			</tr>
 			<tr>
 				<td height="48" align="center" valign="middle"><input
@@ -58,7 +58,7 @@ border-radius: 5px;
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td height="48" colspan="2" align="center"><input class="btn btn-primary" type="submit" name="Login" value="登入" onclick="mail()" />
+				<td height="48" colspan="2" align="center"><input class="btn btn-primary" type="submit" name="Login" value="登入" />
 				    <input type="hidden" name="action" value="login">
 					<a href="<%=request.getContextPath()%>/front-end/mem/register.jsp"><input class="btn btn-primary" type="button"
 						name="Register" value="註冊" /></a></td>
@@ -71,9 +71,10 @@ border-radius: 5px;
 			</tr>
 		</table>
 	</form>
-	<button type="submit" class="btn" onclick="mem1()">趙六</button>
-    <button type="submit" class="btn"onclick="mem2()">王五</button>
 	<jsp:include page="/front-end/footer.jsp"/>
+	<button type="submit" class="btn" onclick="mem1()">趙六</button>
+<button type="submit" class="btn"onclick="mem2()">王五</button>
+<jsp:include page="/front-end/footer.jsp"/>
 </body>
 <Script>
 function mem1() {
@@ -81,8 +82,9 @@ document.getElementById("mail").value ="twm0983527254@gmail.com";
 document.getElementById("password").value ="1";
 }
 function mem2(){
-document.getElementById("mail").value ="member3@yahoo.com.tw";
-document.getElementById("password").value ="member3";
+document.getElementById("mail").value ="ca101g2db@gmail.com";
+document.getElementById("password").value ="1";
 }
 </Script>
+</body>
 </html>

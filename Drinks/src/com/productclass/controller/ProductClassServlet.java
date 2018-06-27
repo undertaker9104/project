@@ -35,7 +35,26 @@ public class ProductClassServlet extends HttpServlet {
 		PrintWriter out = res.getWriter();
 		String action = req.getParameter("action");
 		String productClass_name = req.getParameter("productClass_name");
-		Integer productClass_Status = Integer.parseInt(req.getParameter("productClass_Status"));
+		
+		
+		if ("down".equals(action)) {
+			List<String> errorMsgs;
+			errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String proclsno = req.getParameter("proclsno");
+			Integer productClass_Status = Integer.parseInt(req.getParameter("productClass_Status"));
+		
+		try {
+			    ProductClassService proClasSvc = new ProductClassService();
+			    ProductClassVo proClasVO = proClasSvc.down(proclsno, productClass_Status);
+			    RequestDispatcher successView = req.getRequestDispatcher("/back-end/productclass/listAllProductClass.jsp");
+				successView.forward(req, res);
+			} catch (Exception e) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/productclass/listAllProductClass.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
 		
 		
 		if ("upload".equals(action)) {
@@ -43,6 +62,7 @@ public class ProductClassServlet extends HttpServlet {
 			errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			String product_cl_id = req.getParameter("product_cl_id");
+			Integer productClass_Status = Integer.parseInt(req.getParameter("productClass_Status"));
 		
 		try {
 			    ProductClassService proClasSvc = new ProductClassService();
@@ -50,7 +70,6 @@ public class ProductClassServlet extends HttpServlet {
 			    RequestDispatcher successView = req.getRequestDispatcher("/back-end/productclass/listAllProductClass.jsp");
 				successView.forward(req, res);
 			} catch (Exception e) {
-				 e.getMessage();
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/productclass/listAllProductClass.jsp");
 				failureView.forward(req, res);
 			}
@@ -60,6 +79,7 @@ public class ProductClassServlet extends HttpServlet {
 		if ("add".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			Integer productClass_Status = Integer.parseInt(req.getParameter("productClass_Status"));
 			try {
  			if (productClass_name == null || productClass_name.trim().length() == 0) {
 					errorMsgs.add("產品名稱請勿空白");
@@ -120,7 +140,7 @@ public class ProductClassServlet extends HttpServlet {
 				}
 				ProductClassService  proclsSvc = new ProductClassService();
 				ProductClassVo proclsVO  =new ProductClassVo();
-				proclsVO = proclsSvc.update(product_cls_id,product_cls_name,productClass_Status);
+				proclsVO = proclsSvc.update(product_cls_id,product_cls_name);
 				RequestDispatcher View = req.getRequestDispatcher("back-end/productclass/listAllProductClass.jsp");
 			    View.forward(req, res);
 		    } catch (Exception e) {

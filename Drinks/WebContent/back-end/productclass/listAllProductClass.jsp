@@ -58,6 +58,7 @@ img {
 							<th>商品類別名稱</th>
 							<th>狀態</th>
 							<th>操作</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -77,7 +78,17 @@ img {
 										<input type="hidden" name="proclsno" value="${ productClass.product_cl_id }">
 										<input type="hidden" name="productClass_Status" value="${ productClass.product_cl_status }">  
 										<input type="hidden" name="action" value="getOne"> 
-										<input type="submit" class="btn btn-warning btn-lg" value="修改">
+										<input type="submit" class="btn btn-warning btn-lg " value="修改">
+								
+									</form>
+								</td>
+								
+								<td>
+									<form method="post" action="<%=request.getContextPath()%>/productclass.do">
+										<input type="hidden" name="proclsno" value="${ productClass.product_cl_id }">
+										<input type="hidden" name="productClass_Status" value="0">  
+										<input type="hidden" name="action" value="down"> 
+										<input type="submit" class="btn btn-lg " value="下架">
 									</form>
 								</td>
 							</tr>

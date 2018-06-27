@@ -2,7 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.mem.model.*"%>
-
+<%@ page import="com.manager_account.model.*"%>
+<%@ page import="com.manager_account_authority.model.*"%>
+<%
+Manager_accountVO manager_accountVO = (Manager_accountVO) session.getAttribute("manager_accountVO");
+System.out.print(manager_accountVO.getMan_acc_id());
+Manager_account_authorityService manager_account_authoritySvc = new Manager_account_authorityService();
+List<String> list1 = manager_account_authoritySvc.getOneManager_account_authority(manager_accountVO.getMan_acc_id());
+if(!list1.contains("AC000001")){
+	   out.println("<script language=\"javascript\">");
+	   out.println("alert(\"您尚未有管理權限\");");
+	   out.println("window.history.back(-1);");  
+	   out.println("</script>");
+}
+%>
 <%
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 %>
@@ -86,6 +99,8 @@ th, td {
 	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 	text-decoration: none;
 }
+
+tr:nth-child(even) {background-color:#D3D3D3;}	
 </style>
 
 </head>
@@ -100,11 +115,11 @@ th, td {
 						<small>管理介面</small>
 					</div>
 				</div>
-				<table id="table-1">
-				</table>
-				<div class="page-header text-left">
-					<div class="h1">管理介面<small>所有會員資料</small></div>
-				</div>
+			
+				
+							<h3><font style="font-family:微軟正黑體;font-weight:bold; font-weight:1.5em; font-size:2em" >所有會員資料</font></h3>
+			
+
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
 					<font style="color: red">請修正以下錯誤:</font>
@@ -116,7 +131,10 @@ th, td {
 				</c:if>
 
 				<table>
-					<tr>
+					<tr style="
+    height: 51.979166px;
+    width: 31.979166px;
+">
 						<th>會員編號</th>
 						<th>會員姓名</th>
 						<th>會員信箱</th>

@@ -80,5 +80,14 @@ public class ProductService {
 		dao.upload(productVO);
 		return productVO;
 	}
+	
+	
+	public ProductVo down(Integer prodect_satus,String product_id) {
+		ProductVo productVO = new ProductVo();
+		productVO.setProduct_status(prodect_satus);
+		productVO.setProduct_id(product_id);
+		dao.upload(productVO);
+		return productVO;
+	}
 
 }

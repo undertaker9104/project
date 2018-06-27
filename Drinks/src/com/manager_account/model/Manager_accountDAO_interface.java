@@ -15,5 +15,10 @@ public interface Manager_accountDAO_interface {
 
 	public List<Manager_accountVO> getAll();
 	public List<Manager_accountVO> getOutAll();
+	
+	boolean isManager(String man_acc_id,String accpw);
+	
+	boolean update(String man_acc_id,Integer man_acc_status);
+
 		
 }

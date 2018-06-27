@@ -36,7 +36,7 @@
 							<span class="input-group-addon"> <i
 								class="glyphicon glyphicon-user"></i>
 							</span> <input name="emp_name" id="emp_name" placeholder="員工姓名"
-								class="form-control" type="text" >
+								class="form-control" type="text" onfocus="myFocus(this)" onblur="myBlur(this)">
 						</div>
 					</div>
 				</div>
@@ -47,7 +47,7 @@
 							<span class="input-group-addon"> <i
 								class="glyphicon glyphicon-comment"></i>
 							</span> <input name="accpw"  id="accpw" placeholder="密碼" class="form-control"
-								    type="password" >
+								    type="password" onfocus="myFocus(this)" onblur="myBlur(this)">
 						</div>
 					</div>
 				</div>
@@ -94,4 +94,13 @@ document.getElementById("emp_name").value ="小三";
 document.getElementById("accpw").value ="a3";
 }
 </Script>
+<script>
+	function myFocus(e) {
+		e.style.backgroundColor="#cccccc";
+	}
+	function myBlur(e) {
+		
+		e.style.backgroundColor="#ffffff";
+	}
+</script>
 </html>

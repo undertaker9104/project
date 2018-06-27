@@ -1,7 +1,8 @@
 package com.ordermaster.model;
 
 import java.util.List;
-import java.util.Vector;
+
+import com.orderdetail.model.OrderDetailVo;
 import com.shoppingcart.model.*;
 
 public class OrderMasterService {
@@ -9,6 +10,7 @@ public class OrderMasterService {
 	public OrderMasterService() {
 		dao = new OrderMasterDao();
 	}
+	
 
 	public OrderMasterVo addItem(String mem_id, Integer grou
 			                     , String oute_add, Integer ship_option,
@@ -63,6 +65,22 @@ public class OrderMasterService {
 	public List<OrderMasterVo> getAllByOut() {
 		return dao.getAllByOue();
 				
+	}
+	
+	public boolean update(String ord_id,Integer ord_status){
+		return dao.update(ord_id,ord_status);
+	}
+	//Android使用
+	public String add(OrderMasterVo order_masterVO,List<OrderDetailVo> orderDetailList){
+		return dao.add(order_masterVO, orderDetailList);
+	}
+	//Android使用
+		public List<OrderMasterVo> getAll_By_MemId(String mem_id){
+			return dao.getAll_By_MemId(mem_id);
+	}
+	//Android使用
+	public List<OrderMasterVo> getAll_By_ManId(String men_acc_id){
+		return dao. getAll_By_ManId(men_acc_id);
 	}
 
 
